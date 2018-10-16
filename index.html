@@ -110,17 +110,23 @@ button:active {
 }
 button:disabled {
   pointer-events: none;
-  background: #444242;
+  background:grey;
 }
 button:first-child {
   margin-left: 0;
 }
   
-  button.upload {
+  button.uploadbut {
   background: #16FA41;
   padding: 0.5rem 0.75rem;
   font-size: 0.8rem;
   color:black;
+}
+
+button.uploadbut:disabled {
+  pointer-events: none;
+  background: #444242;
+  color:#ffffff;
 }
   
 audio {

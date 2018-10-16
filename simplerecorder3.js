@@ -149,7 +149,7 @@ function createDownloadLink(blob) {
 	 console.log(clipName);
      var uploadButton = document.createElement('button');
 	 uploadButton.className = 'uploadbut';
-	  
+
  
 	var url = URL.createObjectURL(blob);
 	var au = document.createElement('audio');
@@ -214,7 +214,8 @@ function createDownloadLink(blob) {
  
   div.innerHTML = urlinfo + "<p>" + "<input type='text'  name='mytext' onfocus = 'this.select()' onmouseup = 'return false' value=" + audiourl +" />"
                    + "<p>" + "<i>Click on the above text box to select the Audio URL and feel free to share it!!!</i>" + "<p>";
-  document.getElementById("AudioURL").value = audiourl;		
+ //This is only needed for Form Module , which is present in simplerecorder1.js
+ // document.getElementById("AudioURL").value = audiourl;		
    			  
 				   console.log("calling audio player");	
 				
@@ -237,7 +238,7 @@ function createDownloadLink(blob) {
 					//we are doing this to get the last occurence of the button
 					var d1 =  document.getElementsByClassName("uploadbut").length;
 					var e1 = d1-1;
-					document.getElementsByClassName("uploadbut")[e1].disabled = true;	 
+					document.getElementsByClassName("uploadbut")[e1].disabled = true;
 				  
 		      }
 		  };

@@ -112,15 +112,23 @@ button:disabled {
   pointer-events: none;
   background: #444242;
 }
+
+ 
 button:first-child {
   margin-left: 0;
 }
   
-  button.upload {
+  button.uploadbut {
   background: #16FA41;
   padding: 0.5rem 0.75rem;
   font-size: 0.8rem;
   color:black;
+}
+
+button.uploadbut:disabled {
+  pointer-events: none;
+  background: #444242;
+  color:#ffffff;
 }
   
 audio {
@@ -232,8 +240,10 @@ li {
 	<script src="simplerecorder2.js"></script>
 	
   	<!--<script src="js/app.js"></script>-->
-	<!--<script src="https://addpipe.com/simple-recorderjs-demo/js/app.js"></script>-->
-	<script src="simplerecorder1.js"></script>
+	<!--<script src="https://addpipe.com/simple-recorderjs-demo/js/app.js"></script>
+	  Need to use Simplerecorder3.js . It is same as Simplerecorder1, except it does not have the statement
+	  that copies the audioplayer URL to the form field-->
+	<script src="simplerecorder3.js"></script>
    <div class="row">
        
       <div class="col-md-12">
