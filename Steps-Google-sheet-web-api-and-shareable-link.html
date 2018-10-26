@@ -1,0 +1,506 @@
+     
+<!DOCTYPE html>
+<html>
+<title>Steps to create Google Sheet Web API and shareable link</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+ <!//http://www.w3schools.com/w3css/4/w3.css !>
+      <link rel="stylesheet" href="references/w3.css"> 
+      
+	  <!//http://www.w3schools.com/lib/codemirror.css !>
+      <link rel="stylesheet" href="references/codemirror.css">
+	  
+      <!//http://www.w3schools.com/lib/codemirror.js !>
+	  <script src="references/codemirror.js"></script>
+	  
+	  <!//https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css !>
+      <link rel="stylesheet" href="references/bootstrap.min.css">
+   
+      <!//https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js !>
+	  <script src="references/bootstrap.min.js"></script>
+	  
+	  <!//https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js !>
+	  <script src="references/jquery.min.js"></script>
+	 
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+     
+	  <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+<Style>
+ .navbar .navbar-nav {
+    display: inline-block;
+    float: none;
+}
+ .navbar .navbar-collapse {
+    text-align: left;
+}
+ 
+
+ .footer {
+    text-align: center;
+}
+
+ .padding {
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    text-align: justify;
+}
+  
+ .top {
+    position: relative;
+    background-color: #EAEDED;
+	border: 1px solid green;
+    height: 68px;
+    padding-top: 20px;
+    line-height: 50px;
+    overflow: hidden;
+    z-index: 1;
+}
+.w3-right {
+    float: right!important}
+	
+.w3-wide {
+    letter-spacing: 6px;
+	color: #922B21;}
+ .w3schools-logo {
+    font-family: Pacifico;
+    text-decoration: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 37px;
+    letter-spacing: 3px;
+    color: #480BF7;
+    display: block;
+    position: absolute;
+    top: 17px;
+    padding-left: 2px;
+}
+.w3schools-logo .dotcom {
+    color: #F70B2B;
+}
+.w3schools-logo:hover {
+   
+	text-decoration: none;
+}
+
+@media (max-width: 992px) {
+    .top {
+    height: 100px;
+}
+ .top .w3schools-logo {
+    position: relative;
+    top: 0;
+    width: 100%;
+    text-align: center;
+    margin: auto;
+}
+ .toptext {
+    width: 100%;
+    text-align: center;
+}
+ }
+
+@media screen and (max-width: 600px) {
+    .top {
+    height: 68px;
+}
+ .toptext {
+    display: none;
+}
+ }
+ 
+ img.regular {
+    width: 100%;
+    height: auto;
+}
+
+img.medium {
+    width: 50%;
+    height: auto;
+}
+
+img.small {
+    width: 25%;
+    height: auto;
+}
+ 
+</style>
+
+<style>
+/* Style for the Code*/
+ body {background-color:white;padding:50px 50px}
+
+pre {
+ 
+  overflow:auto;
+  margin:0 0 1em;
+  padding:.5em 1em;
+   
+   
+}
+
+pre code,
+pre .line-number {
+   
+  font:normal normal 12px/14px "Courier New",Courier,Monospace;
+  color:black;
+  display:block;
+}
+
+pre .line-number {
+  float:left;
+  margin:0 1em 0 -1em;
+  border-right:1px solid;
+  text-align:right;
+}
+
+pre .line-number span {
+  display:block;
+  padding:0 .5em 0 1em;
+}
+
+pre .cl {
+  display:block;
+  clear:both;
+}
+
+textarea {
+  position: absolute;
+  left: -100%;
+}
+</style>
+
+</head>
+<body class="w3-container">
+ <div class="row">
+      <div class="col-md-12">
+         <div class="row">
+		    
+			<div class="col-md-2">
+               
+                <div class="row">&nbsp;</div>
+            </div>
+			
+            <div class="col-md-8">
+
+    <div class="row">&nbsp;</div>
+   <div class="top">
+     
+      <a class="w3schools-logo" href="index.html">&nbsp;Form<span class="dotcom">Recorder&nbsp;</span></a>
+      <div class="w3-right  toptext w3-wide ">Record Audio via Customized Google Form&nbsp;</div>
+   </div>
+
+   <div>&nbsp;</div>
+   <div class="col-md-12 shadow p-4 mb-4 border border-primary" style="background-color:pink">
+       <h4 align="center">Steps to create Google Sheet Web API and shareable link</h4>
+   </div>	 
+ 
+   <div>&nbsp;</div>
+   <div class="col-md-12 shadow p-4 mb-4 border border-primary"style="background-color:lightblue">
+      <b style="background-color:yellow">STEP#1: Create a new Google sheet.</b>
+	  <p>
+	  <b>1.a:&nbsp;</b>Sign in to your Google account and Login to Google drive&nbsp;<a href="https://drive.google.com/"target=_blank>https://drive.google.com</a> . 
+	  You should see a screen as follows.
+	  <p>
+	  <img class="medium" src="images/steps-google-sheet-web-api-001.png" alt="Open Google Drive">
+	  <p>
+	  <b>1.b:&nbsp;</b>Click on the New button as shown below.
+      <p>
+	  <img class="small" src="images/steps-google-sheet-web-api-002.png" alt="Open Google Drive">
+	  <p>
+	  <b>1.c:&nbsp;</b>After clicking on new button, a pull-down menu  on left would be displayed as shown below. Click on the link  Google Sheets.
+	  <p>
+	  <img class="small" src="images/steps-google-sheet-web-api-003.png" alt="Open Google Drive">
+	  <p>
+	  <b>1.d:&nbsp;</b>A new blank Google sheet would open as shown below.
+	  <p>
+	  <img class="regular" src="images/steps-google-sheet-web-api-004.png" alt="Open Google Sheet">
+	  <p>
+	  <b>1.e:&nbsp;</b>Please rename the sheet to any name of your choice. You can do that by clicking on Untitled spreadsheet as shown below.
+      <p>
+	  <img class="medium" src="images/steps-google-sheet-web-api-005.png" alt="Open Google Sheet">
+	  <p>
+	  <b>1.f:&nbsp;</b>For the purpose of this tutorial we would rename the document as formrecorder1. The document would like this.
+	  <p>
+	  <img class="regular" src="images/steps-google-sheet-web-api-006.png" alt="Open Google Sheet">
+	  <p>
+   </div>	
+
+   <div>&nbsp;</div>
+   <div class="col-md-12 shadow p-4 mb-4 border border-primary"style="background-color:lightblue">
+      <b style="background-color:yellow">STEP#2: Create a header record in the Google sheet. </b>
+	  <p>
+	  <b>2.a:&nbsp;</b>Type in a header record . It should exactly look as shown below.
+	  <p>
+	  <img class="regular" src="images/steps-google-sheet-web-api-007.png" alt="Type Header record">
+	  <p>
+   </div>	
+   
+   <div>&nbsp;</div>
+   <div class="col-md-12 shadow p-4 mb-4 border border-primary"style="background-color:lightblue">
+      <b style="background-color:yellow">STEP#3: Update the Google Script</b>
+	  <p>
+	  <b>3.a:&nbsp;</b>Click on Tools tab and from the pull down menu click on <>Script editor.
+	  <p>
+	  <img class="small" src="images/steps-google-sheet-web-api-008.png" alt="Script Editor">
+	  <p>
+	  <b>3.b:&nbsp;</b>This will open a new tab called Script Editor.You will see the following screen that has  two lines of code. Remove those lines of code.
+	  <p>
+	  <img class="medium" src="images/steps-google-sheet-web-api-009.png" alt="Script Editor">
+	  <p>
+	  <b>3.c:&nbsp;</b>After removing the code your screen should look like this.
+	  <p>
+	  <img class="medium" src="images/steps-google-sheet-web-api-010.png" alt="Script Editor">
+	  <p>
+	  <b>3.d:&nbsp;</b>Click on the top left next to blue arrow where it says  Untitled project . Following screen will pop up.
+	  <p>
+	  <img class="medium" src="images/steps-google-sheet-web-api-011.png" alt="Script Editor">
+	  <p>
+	  <b>3.e:&nbsp;</b>Enter formrecorder1 in the box and click OK. As shown below.
+	  <p>
+	  <img class="medium" src="images/steps-google-sheet-web-api-012.png" alt="Update Project name">
+	  <p>
+	  <b>3.f:&nbsp;</b>Now we will need to copy the below shown code in blue and paste it in the script editor. Following are two
+	     simple steps :
+		 <p>(i) Copy the below code shown in blue.
+		 <br>(ii) Go to the window of Script Editor, put your cursor on line#1 as shown below and paste the code.
+		 <p>
+	  <img class="small" src="images/steps-google-sheet-web-api-013.png" alt="Update Script Editor">
+	  <p>
+	  
+	  </div>
+      <div>&nbsp;</div>
+	  <!-- Following div displays code  -->
+      <div class="col-md-12 shadow p-4 mb-4 border border-primary">
+
+ 
+<pre><code id="myInput" style="color:blue" >var sheetName = 'Sheet1'  
+ var scriptProp = PropertiesService.getScriptProperties()  
+ function intialSetup () {  
+  var activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()  
+  scriptProp.setProperty('key', activeSpreadsheet.getId())  
+ }  
+ function doPost (e) {  
+  var lock = LockService.getScriptLock()  
+  lock.tryLock(10000)  
+  try {  
+   var doc = SpreadsheetApp.openById(scriptProp.getProperty('key'))  
+   var sheet = doc.getSheetByName(sheetName)  
+   var headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0]  
+   var nextRow = sheet.getLastRow() + 1  
+   var newRow = headers.map(function(header) {  
+    return header === 'timestamp' ? new Date() : e.parameter[header]  
+   })  
+   sheet.getRange(nextRow, 1, 1, newRow.length).setValues([newRow])  
+   return ContentService  
+    .createTextOutput(JSON.stringify({ 'result': 'success', 'row': nextRow }))  
+    .setMimeType(ContentService.MimeType.JSON)  
+  }  
+  catch (e) {  
+   return ContentService  
+    .createTextOutput(JSON.stringify({ 'result': 'error', 'error': e }))  
+    .setMimeType(ContentService.MimeType.JSON)  
+  }  
+  finally {  
+   lock.releaseLock()  
+  }  
+ }  
+ </code></pre>
+  
+ <script>
+(function() {
+    var pre = document.getElementsByTagName('pre'),
+        pl = pre.length;
+ //   for (var i = 0; i < pl; i++) {
+ //       pre[i].innerHTML = '<span class="line-number"></span>' + pre[i].innerHTML + '<span class="cl"></span>';
+ //       var num = pre[i].innerHTML.split(/\n/).length;
+ //       for (var j = 0; j < num; j++) {
+ //           var line_num = pre[i].getElementsByTagName('span')[0];
+ //           line_num.innerHTML += '<span>' + (j + 1) + '</span>';
+ //       }
+    }
+})();
+ 
+</script>
+
+      </div>
+<div>&nbsp;</div>
+   <div class="col-md-12 shadow p-4 mb-4 border border-primary"style="background-color:lightblue">
+   <p>
+   <b>3.g:&nbsp;</b>
+After copy pasting , your screen in Script Editor should look as follows. <p>
+<b style="color:red">VERY IMPORTANT CHECK </b> After copy paste, 
+the last line of code should end in line 31. This ensures that you have copy pasted the code correctly.
+      <p>
+	  <img class="regular" src="images/steps-google-sheet-web-api-014.png" alt="Update Script Editor">
+	  <p>
+   </div>   
+   <div>&nbsp;</div>
+   <div class="col-md-12 shadow p-4 mb-4 border border-primary"style="background-color:lightblue">
+      <b style="background-color:yellow">STEP#4: Save the Google script</b>
+	   <p>
+	   <b>4.a:&nbsp;</b> Click on the File tab , as shown below and highlighted in yellow. A pull down menu will appear and click on save.
+	   <p>
+	  <img class="regular" src="images/steps-google-sheet-web-api-015.png" alt="Save the Google Script">
+	   	  
+   </div>
+
+   <div>&nbsp;</div>
+   <div class="col-md-12 shadow p-4 mb-4 border border-primary"style="background-color:lightblue">
+      <b style="background-color:yellow">STEP#5: Initial Setup of the script.</b>
+	  <p>
+	  <b>5.a:&nbsp;</b>Click on the Run tab as highlighted in yellow. From the pulldown menu click on Run function and then from sub menu click on initialSetup
+       <p>
+	  <img class="regular" src="images/steps-google-sheet-web-api-016.png" alt="Update Script Editor">
+	  <p>
+	  <b>5.b:&nbsp;</b> Following box will come up. Click on the button Review Permissions.
+	  <p>
+	  <img class="regular" src="images/steps-google-sheet-web-api-017.png" alt="Update Script Editor">
+	  <p>
+	  <b>5.c:&nbsp;</b> Following box will pop up. Click on your account.
+	  <p>
+	  <img class="medium" src="images/steps-google-sheet-web-api-018.png" alt="Update Script Editor">
+	  <p>
+	  <b>5.d:&nbsp;</b> Following box will pop up. Now click where it says Advanced as highlighted in yellow below.
+	  <p>
+	  <img class="medium" src="images/steps-google-sheet-web-api-019.png" alt="Update Script Editor">
+	  <p>
+	  <b>5.e:&nbsp;</b>Following box will now pop up. Click on the bottom left link Go to formrecorder1 (unsafe)  as highlighted in yellow below
+      <p>
+	  <img class="medium" src="images/steps-google-sheet-web-api-020.png" alt="Update Script Editor">
+	  <p>
+	   <b>5.f:&nbsp;</b>Following Box will pop up. Now click on the button that says Allow.After clicking on the Allow button that box will be closed and you 
+	    will be back to the script screen.
+	   <p>
+	  <img class="medium" src="images/steps-google-sheet-web-api-022.png" alt="Update Script Editor">
+	 </div>   
+   
+   <div>&nbsp;</div>
+   <div class="col-md-12 shadow p-4 mb-4 border border-primary"style="background-color:lightblue">
+      <b style="background-color:yellow">STEP#6: Create Trigger</b>
+	  <p>
+	  <b>6.a:&nbsp;</b>Click on Edit tab as shown below, a pull down menu will appear. 
+        Click where it says  Current project's triggers
+      <p>
+	  <img class="medium" src="images/steps-google-sheet-web-api-023.png" alt="Update Script Editor">
+	  <p>
+	  <b>6.b:&nbsp;</b>The following box will appear.
+	  <p>
+	  <img class="medium" src="images/steps-google-sheet-web-api-024.png" alt="Update Script Editor">
+	  <p>
+	  <b>6.c:&nbsp;</b>As we can see that there are no triggers, hence we will add one. Click on where it says 
+      <p>
+	  <img class="small" src="images/steps-google-sheet-web-api-025.png" alt="Update Script Editor">
+	  <p>
+	  <b>6.d:&nbsp;</b>Once we click, then following box will appear.
+	  <p>
+	  <img class="regular" src="images/steps-google-sheet-web-api-026.png" alt="Update Script Editor">
+	  <p>
+	  <b>6.e:&nbsp;</b>Change the drop-down values to the following :
+	  <p>
+	  Run : doPost
+      <br>Events : From spreadsheet  Onform submit.
+	  <p>
+	  After changing the values your box should look as follows. Now click Save.
+      <p>
+	  <img class="regular" src="images/steps-google-sheet-web-api-027.png" alt="Update Script Editor">
+	  <p> 
+   </div>
+   
+   <div>&nbsp;</div>
+   <div class="col-md-12 shadow p-4 mb-4 border border-primary"style="background-color:lightblue">
+      <b style="background-color:yellow">STEP#7: Publish your script and generate the Google Sheet Web API link</b>
+	  <p>
+	  <b>7.a:&nbsp;</b>Click on the Publish tab as highlighted in yellow below.  
+	  <p>
+	  <img class="regular" src="images/steps-google-sheet-web-api-028.png" alt="Update Script Editor">
+	  <p> 
+	  <b>7.b:&nbsp;</b>A pulldown menu will show up, click on the first item that says Deploy as web app.
+	  <p>
+	  <img class="medium" src="images/steps-google-sheet-web-api-029.png" alt="Update Script Editor">
+	  <p> 
+	  <b>7.c:&nbsp;</b>Following box would pop up. Change the following :
+	  <p>
+          1. In the box under New, type Initial version
+      <br>2. In the bottom where  it say Who has access to the app  select    Anyone, even anonymous
+      <p>
+	  <img class="medium" src="images/steps-google-sheet-web-api-030.png" alt="Update Script Editor">
+	  <p> 
+	  <b>7.d:&nbsp;</b>Your box should look as follows.Now click on the blue button that says Deploy.
+	  <p>
+	  <img class="medium" src="images/steps-google-sheet-web-api-031.png" alt="Update Script Editor">
+	  <p> 
+	  <b>7.e:&nbsp;</b>Following  box should pop up.
+	  <p>
+	  <img class="medium" src="images/steps-google-sheet-web-api-032.png" alt="Update Script Editor">
+	  <p>
+	  <h2 style="color:red">CAUTION : Donot Click OK now.</h2>
+	  <p>
+	  <b>7.f:&nbsp;</b>
+	  Copy paste the Current web app URL in a notepad.It should look something like this, ending with exec. 
+	  This is the Google Sheet web API URL ending with exec.
+	  <p>
+      <b>https://script.google.com/macros/s/AKfycbxOH0dVRhlemE2mWoVHo0yYKKw3MOS5O69CG6P5vesw8gI4gLE1/exec</b>
+      <p>
+Once you have copy pasted the Web API URL,  click OK box. The popup should disappear.
+<p>
+
+   </div>
+   
+   <div>&nbsp;</div>
+   <div class="col-md-12 shadow p-4 mb-4 border border-primary"style="background-color:lightblue">
+      <b style="background-color:yellow">STEP#8: Generate the Google sheet shareable link</b>
+	  <p>
+	 <b>8.a:&nbsp;</b> Click on the tab for the google sheet as highlighted in yellow below.
+	 <p>
+	  <img class="medium" src="images/steps-google-sheet-web-api-033.png" alt="Google sheet shareable link">
+	  <p>
+	   <b>8.b:&nbsp;</b>Click on the File menu as shown in yellow below.
+	   <p>
+	  <img class="regular" src="images/steps-google-sheet-web-api-034.png" alt="Google sheet shareable link">
+	  <p>
+	  <b>8.c:&nbsp;</b>From the File pull down menu click on the link Publish to the web as shown in yellow below.
+	  <p>
+	  <img class="small" src="images/steps-google-sheet-web-api-035.png" alt="Google sheet shareable link">
+	  <p>
+	  <b>8.d:&nbsp;</b>Following pop up box would appear. Click on the blue publish button.
+	  <p>
+	  <img class="regular" src="images/steps-google-sheet-web-api-036.png" alt="Google sheet shareable link">
+	  <p>
+	  <b>8.e:&nbsp;</b>The following pop up box would appear, click OK button.
+	  <p>
+	  <img class="medium" src="images/steps-google-sheet-web-api-037.png" alt="Google sheet shareable link">
+	  <p>
+	  <b>8.f:&nbsp;</b>You would see the following popup box. It will have the shareable link in the tex box. Copy paste the link in a document.
+       <p>
+	  <img class="regular" src="images/steps-google-sheet-web-api-038.png" alt="Google sheet shareable link">
+	  <p>
+	  Your Google sheet link should look something similar.
+	  <p><b>
+https://docs.google.com/spreadsheets/d/e/2PACX-1vQiP4g6kke3EO46f-bG1FCJk2MOY15S75peJ7B7GhgG0roosp3Ec7Gg4RgX-SG37_Hzyg0GtFVeHO_d/pubhtml</b>
+
+   </div>
+   <div>&nbsp;</div>
+   <div class="col-md-12 shadow p-4 mb-4 border border-primary"style="background-color:lightblue">
+    Once you have the :<p>
+1.	Google Web API URL .		(obtained at the end of STEP-7)<br>
+2.	Google Sheet shareable link		(obtained at the end of STEP-8)<p>
+then you proceed to <a href="http://www.formrecorder.com/formbuilder.html"target=_blank>http://www.formrecorder.com/formbuilder.html</a> 
+and enter the above two pieces of information along with your Form name to generate your Customized Google Audio Form.
+
+   </div>
+   <div>&nbsp;</div>
+   <div class="col-md-12 shadow p-4 mb-4 border border-primary" style="background-color:lightgrey">
+       <h6 align="center">If you have any questions about the above steps, then please <a href="contact.html">click here</a> to contact us</h6>
+   </div>
+ 
+ 
+ 
+ </div>
+      </div>
+   </div>
+   <!-- /End of Content section -->
+</div>   
+</body>
+</html>

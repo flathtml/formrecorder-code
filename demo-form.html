@@ -3,8 +3,7 @@
 <html>
 <title>Record Audio and share it instantly via a link</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-	  
+   
 	  <!//https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css !>
       <link rel="stylesheet" href="references/bootstrap.min.css">
    
@@ -110,10 +109,8 @@ button:active {
 }
 button:disabled {
   pointer-events: none;
-  background: #444242;
+  background:grey;
 }
-
- 
 button:first-child {
   margin-left: 0;
 }
@@ -130,6 +127,8 @@ button.uploadbut:disabled {
   background: #444242;
   color:#ffffff;
 }
+
+ 
   
 audio {
   display: block;
@@ -162,8 +161,8 @@ li {
 	display:hide;
 	color:lightblue;
 	}
-	 
-	 
+	
+	
 	</style>
 	<style>
  
@@ -229,30 +228,38 @@ button.copytext {
   text-align:center;
 }
 </style>
-
 </head>
 <body>
- <!-- /.Start of Content section -->
-    
-   <div class="row">
-      <div class="col-md-12">
-         <div class="row">
-		    
-			<div class="col-md-2">
-            </div>
-			
-            <div class="col-md-8">
+ 
+<div class="container-fluid">
+ 
+
     <div class="row">&nbsp;</div>
    <div class="top">
      
       <a class="w3schools-logo" href="index.html">&nbsp;Form<span class="dotcom">Recorder&nbsp;</span></a>
-      <div class="w3-right  toptext w3-wide ">Record Audio and share instantly&nbsp;</div>
+      <div class="w3-right  toptext w3-wide ">Record Audio via Google Form&nbsp;&nbsp;</div>
    </div>
-        <div>&nbsp;</div>
+     <div>&nbsp;</div>
+   <div align="center"><a href="simplerecorder.html">Simple Audio Recorder</a></div>
+     <div>&nbsp;</div>
    <div class="col-md-12 shadow p-4 mb-4 border border-primary" style="background-color:pink">
      <b>PLEASE NOTE :</b>&nbsp;Currently this app does not work in Facebook browser. In case you have opened this via Facebook then you can tap on the three dots at the top right section and a popup window will open up where in you can choose to open it in Chrome. For iphone users, you can open in safari.
    
    </div>
+   <div>&nbsp;</div>
+   <div class="col-md-12 shadow p-4 mb-4 border border-primary">
+ <h5>Welcome to Form Recorder. It is a Customized Google form through which the user can record the audio and submit it via the form.</h5>
+<p>&nbsp;</p>
+<p>
+STEP-1 : Record the Audio and Upload it.The Uploaded URL will be populated in the form</p>
+
+<p>
+STEP-2 : Complete the Audio form details and  click on SUBMIT button.</p>
+<p>
+Once the above two steps are completed then the Audio form details along with audio URL are sent
+to the Google sheet attached to the customized audio form.</p>
+</div>
   <div>&nbsp;</div>
    <div class="col-md-12 shadow p-4 mb-4 border border-primary" style="background-color:lightblue">
     
@@ -276,8 +283,8 @@ button.copytext {
 	<div id="demo" class="status"></div>
 	<div>&nbsp;</div>
 	<div id ="audio" class="info"></div>
- 
-    <div id="myModal" class="modal">
+
+	<div id="myModal" class="modal">
     <!-- Modal content -->
       <div class="modal-content">
         <span class="close">&times;</span>
@@ -292,50 +299,90 @@ button.copytext {
     <div id="formats" class="formats"></div>
   	 	  
 	</div>
-	<div>&nbsp;</div>
-	<div class="shareurl col-md-12 shadow p-4 mb-4 border border-primary" style="background-color:pink">
-    <p>&nbsp;</p>
-  <h4 align="center">E-mail Your Audio URL</h4>
-  <form name="contact" method="post" action="PHPMailer/email-url.php"> 
-     <div class="form-group">
-      <label for="first_name">Name *</label>
-      <input  type="text" name="Fullname" class="form-control" required>
-    </div>
+		<div>&nbsp;</div>
+	 <div class="col-md-12 shadow p-4 mb-4 border border-primary" style="background-color:pink">
+<h3 align="center">Customized Google  Audio Form(Demo Version)</h3>
+  <form name="contact"> 
+  
     <div class="form-group">
-      <label for="Email">Email *</label>
-      <input type="email" name="Email" class="form-control" id="Email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" required>
+      <label for="AudioURL">Audio URL</label>
+      <input type="text" name="AudioURL" class="form-control" id="AudioURL"  required>
+    </div>
+	
+    <div class="form-group">
+      <label for="FirstName">First Name</label>
+      <input type="text" name="FirstName" class="form-control" id="FirstName" required>
     </div>
 	
 	<div class="form-group">
-      <label for="URL">Audio URL *</label>
-      <input type="text" name="shareurl" class="form-control" id="shareurl"  required>
+      <label for="LastName">Last Name</label>
+      <input type="text" name="LastName" class="form-control" id="LastName" required>
+    </div>
+     
+    <div class="form-group">
+      <label for="Grade">Grade</label>
+      <input type="text" name="Grade" class="form-control" id="Grade"  required>
+    </div>
+	 
+	
+	<div class="form-group">
+      <label for="Notes">Notes</label>
+      <input type="text" name="Notes" class="form-control" id="Notes">
     </div>
     
-     <input type="submit" value="Submit"> 
+     <button type="submit">SUBMIT</button>  
       <p>&nbsp;</p>
      </form>
-	</div>
-	<div>&nbsp;</div>
-		<div>&nbsp;</div>
+    
+	<script>     
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbwJT5MFIItv9D7R26mCkMlqeB70peOW7pHnn7AUlmMjJoxcQoA/exec'
+  const form = document.forms['contact']  
+  form.addEventListener('submit', e => {  
+   e.preventDefault()  
+   fetch(scriptURL, { method: 'POST', body: new FormData(form)})  
+  //  .then(response => console.log('Successmmm!', response))  
+  //  .catch(error => console.error('Error!', error.message))  
+      .then(response => success())  
+      .catch(error => console.error('Error!', error.message))  
+  })  
+  function success() {
+  document.getElementById("status1").innerHTML = "Form Submitted to Google sheet." + "<a href='https://docs.google.com/spreadsheets/d/1Gy_NReRyEdZ0dEmRY-vxwXmUL0746q8irDD-K7SXOPw/edit#gid=0'target=_blank'>Click here</a>to access the Google sheet";
+  
+   clear();
+ 
+  }
+  
+  function clear () {
+  document.contact.FirstName.value='';
+  document.contact.LastName.value='';
+  document.contact.Grade.value='';
+  document.contact.AudioURL.value='';
+  document.contact.Notes.value='';
+  }
+  
+  $(document).ready(function(){
+    $("input").focus(function(){
+        $(this).css("background-color", "#cccccc");
+    });
+    $("input").blur(function(){
+        $(this).css("background-color", "#ffffff");
+    });
+});
+ </script> 
+ </div>
+ <p>&nbsp;</p>
+  
+<p id="status1"></p>
+<div class="col-md-12 shadow p-4 mb-4 border border-primary" style="background-color:lightblue">
 	 
-	 <div   class="col-md-12 shadow p-4 mb-4 border border-primary">
-	<div class ="guide">
-	<h4 align="center">USER'S GUIDE</h4>
-	<p>1 : Click on RECORD button to start recording. 
-	<p>2 : Click on STOP button when you are done recording.
-	<p>3 : The audio player will be displayed wherein you can listen to your recording.
-	<p>4 : To share your audio file, you will need to click on SHARE button.It will create a shareable link that you can
-	       share with others.
-    <p>5 : To download the audio file to your device you can click on the Save to Device link.
-    <p>6 : You can also create multiple recordings and choose the best one to share.	
-	 <div>
-	 
-  <p><i>Following is the snapshot as to how one can open the link in Chrome from facebook browser.
-    If you have questions then please <a href="contact.html">Contact us</a></i>
-  </div>
-  <div>
-  <img src="img-001-android-chrome.jpg" alt="Android Chrome help" class="responsive" width="250" height="400">
-   </div>
+	  PLEASE NOTE : The above form is just a demo form. The form's layout, fields and other behaviors can be customized based on your needs
+	   If you need further help or have any questions then please <a href="contact.html">Contact us</a>
+   
+	  </div> 
+
+     </div>
+      
+	  
      </div>
  
 	</div>
@@ -345,22 +392,16 @@ button.copytext {
 	<script src="simplerecorder2.js"></script>
 	
   	<!--<script src="js/app.js"></script>-->
-	<!--<script src="https://addpipe.com/simple-recorderjs-demo/js/app.js"></script>
-	  Need to use Simplerecorder3.js . It is same as Simplerecorder1, except it does not have the statement
-	  that copies the audioplayer URL to the form field-->
-	<script src="simplerecorder3.js"></script>
+	<!--<script src="https://addpipe.com/simple-recorderjs-demo/js/app.js"></script>-->
+	<script src="simplerecorder1.js"></script>
    <div class="row">
        
-      <div class="col-md-12  p-4 mb-4"> 
-	    <div class="footer">&copy;2018 Formrecorder.com&nbsp;&nbsp;<a href="privacypolicy.html">Privacy Policy</a>&nbsp;&nbsp;
-		 <a href="contact.html">Contact us</a></div>
+      <div class="col-md-12">
+         <div class="footer">&copy;2018 Formrecorder.com&nbsp;&nbsp;<a href="privacypolicy.html">Privacy Policy</a></div>
          <div class="row">&nbsp;</div>
-      </div> 
+      </div>
    </div>
-   </div>
-  </div>
-    </div>
-  </div>	
+   
  
  
 </body>

@@ -206,17 +206,12 @@ function createDownloadLink(blob) {
 					console.log("audiourl......");	  
 					console.log(audiourl);
 						var texturl = '<a href="'+ audiourl +'"target=_blank>Audio URL</a>';
-						var urlinfo = "File :" + clipName + "<br>" + "uploaded to.. "+ texturl;
+						var urlinfo = "File :" + clipName + "<br>" + "uploaded to "+ texturl;
 						var mydiv = document.getElementById("audio");
-                        var div = document.createElement("div");
+  var div = document.createElement("div");
   mydiv.appendChild(div);
   div.className ="dynamicDiv";
   div.innerHTML = urlinfo;
-  
-  console.log("About to populate share" + audiourl);  
-  shareurl.style.display = "block";
-  document.getElementById("shareurl").value = audiourl;   
-  
  //This has been commented out as now we are dispalying the URL in popup box using modal
  // div.innerHTML = urlinfo + "<p>" + "<input class='form-control' style='background-color:#04089F; color: white' type='text'  name='mytext' onfocus = 'this.select()' onmouseup = 'return false' value=" + audiourl +" />"
  //                  + "<p>" + "<i>Click on the above text box to select the Audio URL and feel free to share it!!!</i>" + "<p>"
@@ -236,7 +231,8 @@ var span = document.getElementsByClassName("close")[0];
  
     modal.style.display = "block";
     document.getElementById("myInput").value = audiourl;   
-     
+    
+ 
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
@@ -253,10 +249,10 @@ span.onclick = function() {
  
  
  
-  //	 commented out because Simplerecorder does not need it. Instead need to populate ShareURL form			   
+  				   
  //  document.getElementById("AudioURL").value = audiourl;		
    
-    
+  
    			  
 				   console.log("calling audio player");	
 				

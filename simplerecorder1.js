@@ -190,7 +190,7 @@ function createDownloadLink(blob) {
 	 	
 	uploadButton.appendChild(upload);
 	uploadButton.href="#";
-	uploadButton.innerHTML = "Upload";
+	uploadButton.innerHTML = "Share";
 	uploadButton.addEventListener("click", function(event){
 		  var xhr=new XMLHttpRequest();
 		  xhr.onload=function(e) {
@@ -211,10 +211,48 @@ function createDownloadLink(blob) {
   var div = document.createElement("div");
   mydiv.appendChild(div);
   div.className ="dynamicDiv";
+  div.innerHTML = urlinfo;
+ //This has been commented out as now we are dispalying the URL in popup box using modal
+ // div.innerHTML = urlinfo + "<p>" + "<input class='form-control' style='background-color:#04089F; color: white' type='text'  name='mytext' onfocus = 'this.select()' onmouseup = 'return false' value=" + audiourl +" />"
+ //                  + "<p>" + "<i>Click on the above text box to select the Audio URL and feel free to share it!!!</i>" + "<p>"
+ //				   "<button onclick='myFunction()'>Copy text</button>";
+
+
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
  
-  div.innerHTML = urlinfo + "<p>" + "<input type='text'  name='mytext' onfocus = 'this.select()' onmouseup = 'return false' value=" + audiourl +" />"
-                   + "<p>" + "<i>Click on the above text box to select the Audio URL and feel free to share it!!!</i>" + "<p>";
-  document.getElementById("AudioURL").value = audiourl;		
+    modal.style.display = "block";
+    document.getElementById("myInput").value = audiourl;   
+    
+ 
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+ 
+// When the user clicks anywhere outside of the modal, close it
+//window.onclick = function(event) {
+//    if (event.target == modal) {
+//        modal.style.display = "none";
+//    }
+//}
+ 
+ 
+ 
+  				   
+   document.getElementById("AudioURL").value = audiourl;		
+   
+  
    			  
 				   console.log("calling audio player");	
 				
@@ -237,7 +275,17 @@ function createDownloadLink(blob) {
 					//we are doing this to get the last occurence of the button
 					var d1 =  document.getElementsByClassName("uploadbut").length;
 					var e1 = d1-1;
-					document.getElementsByClassName("uploadbut")[e1].disabled = true;	 
+					document.getElementsByClassName("uploadbut")[e1].disabled = true;
+				
+				$.ajax({ url: 'append-upload-xml.php',
+								data: {filhtml,clipName, dispmmddyyyy},
+								type: 'post',
+									success: function(output) {
+				//					alert(output);
+				    				}
+					});
+					console.log("uploaded xml info");	
+					
 				  
 		      }
 		  };
@@ -278,5 +326,14 @@ function timer() {
 }
  
 //Timer code - ends
+
+// Function for Copy Text button
+function copyFunction(){
+    var copyText = document.getElementById("myInput");
+    copyText.select();
+    document.execCommand("copy");
+   
+   
+   };
 
  
