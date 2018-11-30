@@ -221,24 +221,32 @@ function signOut() {
   </script>
   </div>
    <div class="row">&nbsp;</div>
-					<div class="shadow p-4 mb-4 border border-primary">
-					<h4>STEPS TO CREATE CUSTOMIZED GOOGLE FORM</h4>
-						 <p>&nbsp;</p>
-                     <h6>STEP-1 : Log  in to your Google account by clicking on the above  Google Sign in 
-					     button.</h6>
-						  	 <p>&nbsp;</p>
-					 <h6>STEP-2 : Provide the following details for your form and click SUBMIT button</h6>	
-					 <p>&nbsp;</p>
-						<h5> <a href="Steps-Google-sheet-web-api-and-shareable-link.html"target=_blank>Click here</a>
-						 for instructions to generate Google Sheet API and Google Sheet URL.</h5>
-						 	 <p>&nbsp;</p>
-					  <h6>Once you have submitted your request, Formbuilder will generate a customized Google Form and will email you the link. You can
-					      further forward the link to your students who will record their assignments and submit
-						  them via the form.The Customized Google Form will be linked to your Google Sheet, thus the Form data
-					      will always be with you</h6>						  
+					<div class="shadow p-4 mb-4 border border-primary" style="background-color:lightblue">
+					<h4 style="text-align:center">STEPS TO CREATE CUSTOMIZED GOOGLE FORM.</h4>
+					<p>&nbsp;</p>
+					<i>
+					If you want to generate a Form that has an embedded audio question, 
+					  then <a href="formbuilder-audioquiz.html"target=_blank>click here</a></i>
+					   <p>&nbsp;</p>
+					   
+                     <b>STEP-1 : </b>Log  in to your Google account by clicking on the above  Google Sign in 
+					     button.
+			          <p>&nbsp;</p>
+					 <b>STEP-2 :</b> Provide the details for your form that you want to generate , by filling the below pink form and click SUBMIT button.	
+					  <p>&nbsp;</p>
 						 
+					  <b>STEP-3 :</b>Once you have submitted your request, Formbuilder will generate a customized Google Form and will email you the Form link.
+					  <p>&nbsp;</p><b>How will the form look like?</b>
+					  <a href="demo-form.html"target=_blank>Click here</a> to view the demo version of the form.Your Form will be similar
+					  to this form, except its title will be replaced by the Form title provided by you.
+					  <p>&nbsp;</p><b>What should I do after I receive the Form Link?</b>
+					  You can forward the form link to your students who will record their assignments and submit
+						  them via the form.The Customized Google Form will be linked to your Google Sheet, thus the Form data
+					      submitted by the students will be safe in your Google Sheet.					  
+						  
                      </div>					 
 					 <div class="shadow p-4 mb-4 border border-primary" style="background-color:pink">
+					 <h4 style="text-align:center">DETAILS NEEDED TO GENERATE THE FORM</h4>
 						 <form name="contact" method="post" action="formbuilder.php"> 
 						<div class="form-group">
 					    <label for="formname">Name of the Form</label>
@@ -255,7 +263,8 @@ function signOut() {
 						</div>
 						
 						<div class="form-group">
-						<label for="SheetAPI">Google Sheet API</label>
+						<label for="SheetAPI">Google Sheet API</label><h5> <a href="Steps-Google-sheet-web-api-and-shareable-link.html"target=_blank>Click here</a>
+						 for instructions to generate Google Sheet API and Google Sheet URL.</h5>
 						<input type="text" name="SheetAPI" class="form-control" id="SheetAPI"  required>
 						</div>
 						
