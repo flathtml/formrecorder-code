@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+   <?!= HtmlService.createHtmlOutputFromFile('Stylesheet').getContent(); ?> 
+   <!--It will add Stylesheet file-->
+  </head>
+ 
+ <body class="container-fluid" onload ="getcontent()">
+ 
+ 
+ <div class="row">
+   <div class="col-md-2"></div>
+   <div class="col-md-8 p-4">
+     <div class="top">
+           
+	      <a class="w3schools-logo" href="https://www.formrecorder.com/">&nbsp;Form<span class="dotcom">Recorder&nbsp;</span></a>
+      <div class="w3-right  toptext w3-wide ">Record Audio via Google Form&nbsp;&nbsp;</div>
+     </div>
+   </div>
+   <div class="col-md-2"></div>
+ </div>
+ 
+   
+ <div class="row">
+   <div class="col-md-2"></div>
+   <div class="col-md-8 p-4">
+       <div id ="audioplayer" class="col-md-12 shadow p-4 mb-4" style="background-color:#99ffff">
+   <!--Audio Player Starts-->
+    <h4 align="center"><i>Simple Audio Recorder</i></h4>
+           <h6 align="center"><i>Records Audio and Uploads it to Google Drive</i></h6>
+           <div id="controls" align="center">
+		  <button type="button" id="recordButton" class="btn btn-default btn-sm">
+			  <span class="glyphicon glyphicon-record"></span> Record
+		  </button>
+		<!-- <button id="recordButton">Record</button> -->
+		
+		<button type="button" id="pauseButton" class="btn btn-default btn-sm">
+			  <span class="glyphicon glyphicon-pause"></span> Pause
+		</button>
+		<!-- <button id="pauseButton" disabled>Pause</button> -->
+		
+		<button type="button" id="stopButton" class="btn btn-default btn-sm">
+			  <span class="glyphicon glyphicon-stop"></span> Stop
+		</button>
+		<!-- <button id="stopButton" disabled>Stop</button> -->
+		 
+		</div>
+		 
+		   <div>&nbsp;</div>
+		<div id="timer" class="timer" align="center">&nbsp;Recording Timer :<time>00:00:00</time>&nbsp;</div> 
+		 <div>&nbsp;</div>
+		<ol id="recordingsList"></ol>
+		 <section class="sound-clips" align="center">
+		 <div id="demo" class="status" align="center"></div>
+		 <div id ="uploadb" align="center"></div>   
+		<div id ="showurl1" align="center"><input type="text" value="---" id="showurl"></input> 
+	 <button type="button" onclick="copyFunction()" class="copytext">Copy URL</button></div> 
+		
+		<div id="myModal" class="modal">
+		<!-- Modal content -->
+		  <div class="modal-content">
+			<span class="close">&times;</span>
+			   
+				<i>Link to your Recorded Audio URL</i>
+			   
+			   <input type="text" value="https://www.formrecorder.com" id="myInput"><div>&nbsp;</div>
+			  <div style="text-align: center;"><button onclick="copyFunction()" id ="main" class="copytext">Copy URL </button></div>
+		  </div>
+		</div>
+	 
+		<div id="formats" class="formats"></div>
+     
+   
+   <!--Audio Player Ends-->
+   </div>
+   </div>
+   <div class="col-md-2"></div>
+ </div>   
+ 
+ 
+ <div class="row">
+ <div class="col-md-2"></div>
+   <div class="col-md-8 p-4">
+     <div id ="message" class="col-md-12 shadow p-4 mb-4" style="background-color:#ffff80">
+      </div>
+   <!--Message Starts-->
+   
+   
+    <!--Message Ends-->
+        </div>
+ <div class="col-md-2">&nbsp;</div>   
+ </div>
+ 
+ <div class="row">
+ <div class="col-md-2"></div>
+   <div class="col-md-8 p-4">
+   
+	       <div class="footer">&copy;2018 Formrecorder.com&nbsp;<br><a href="https://www.formrecorder.com/privacypolicy.html">Privacy Policy</a>&nbsp;&nbsp;
+		 <a href="https://www.formrecorder.com/contact.html">Contact us</a>&nbsp;&nbsp;
+		 <a href="https://www.formrecorder.com/faq.html">FAQ</a></div>
+      
+   </div>
+ <div class="col-md-2"></div>  
+ </div>
+  
+ <?!= HtmlService.createHtmlOutputFromFile('JavaScript').getContent(); ?>  <!--It will add JavaScript file-->
+  </body>
+</html>
+
+
+
