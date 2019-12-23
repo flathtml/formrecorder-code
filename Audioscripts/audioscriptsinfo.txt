@@ -1,0 +1,16 @@
+ABOUT AUDIOSCRIPTS :
+-------------------
+Audio Scripts folder consists of all the scripts that are needed to run Form Recorder product.
+-----------------------------------------------------------------------------------------------
+1. audioplayer.js : Has the basic Javascript (copy of recorder.js) that is needed to record an audio.
+
+2. code.gs : Audio Form Google Script 
+3. Index.html : Audio Form Main HTML Page
+4. JavaScript.html : Audio Form Javascript Page
+5. Stylesheet.html : Audio Form Stylesheet page
+
+NOTE : To create a Google Audio Form, the above 4 scripts need to be attached to a Google Form and deployed as web app.
+
+6. uploadstemp.php : php code that uploads a Temporary file, that is further accessed by code.gs to upload the 
+                     file in the Google Drive.
+					 
