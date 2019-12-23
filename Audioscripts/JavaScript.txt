@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+  </head>
+  <body>
+   	<!-- <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script> -->
+    <!--- The following audioplayer.js is copy of the above recorder.js --->
+    <script src="https://www.formrecorder.com/audioplayer.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	
+
+    <!--Script for Player#0pl1 starts-->
+	<script>
+    //webkitURL is deprecated but nevertheless
+var uploadfile;    
+URL = window.URL || window.webkitURL;
+
+var gumStream; 						//stream from getUserMedia()
+var rec; 							//Recorder.js object
+var input; 							//MediaStreamAudioSourceNode we'll be recording
+
+// shim for AudioContext when it's not avb. 
+var AudioContext = window.AudioContext || window.webkitAudioContext;
+var audioContext //audio context to help us record
+
+var recordButton0pl1 = document.getElementById("recordButton0pl1");
+var stopButton0pl1 = document.getElementById("stopButton0pl1");
+var pauseButton0pl1 = document.getElementById("pauseButton0pl1");
+
+ 
+//add events to those 2 buttons
+recordButton0pl1.addEventListener("click", startRecording0pl1);
+stopButton0pl1.addEventListener("click", stopRecording0pl1);
+pauseButton0pl1.addEventListener("click", pauseRecording0pl1);
+
+recordButton0pl1.disabled = false;
+stopButton0pl1.disabled = true;
+pauseButton0pl1.disabled = true;
+
+  
+function startRecording0pl1() {
+	console.log("recordButton clicked");
+     document.getElementById("timer0pl1").style.display = "block";
+      
+	/*
+		Simple constraints object, for more advanced audio features see
+		https://addpipe.com/blog/audio-constraints-getusermedia/
+	*/
+    
+    var constraints = { audio: true, video:false }
+
+ 	/*
+    	Disable the record button until we get a success or fail from getUserMedia() 
+	*/
+
+	recordButton0pl1.disabled = true;
+	stopButton0pl1.disabled = false;
+	pauseButton0pl1.disabled = false
+
+	/*
+    	We're using the standard promise based getUserMedia() 
+    	https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
+	*/
+
+	navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
+		console.log("getUserMedia() success, stream created, initializing Recorder.js ...");
+
+		/*
+			create an audio context after getUserMedia is called
+			sampleRate might change after getUserMedia is called, like it does on macOS when recording through AirPods
+			the sampleRate defaults to the one set in your OS for your playback device
+
+		*/
+		audioContext = new AudioContext();
+
+		//update the format 
+		//document.getElementById("formats0pl1").innerHTML="Format: 1 channel pcm @ "+audioContext.sampleRate/1000+"kHz"
+
+		/*  assign to gumStream for later use  */
+		gumStream = stream;
+		
+		/* use the stream */
+		input = audioContext.createMediaStreamSource(stream);
+
+		/* 
+			Create the Recorder object and configure to record mono sound (1 channel)
+			Recording 2 channels  will double the file size
+		*/
+		rec = new Recorder(input,{numChannels:1})
+
+		//start the recording process
+		rec.record();
+		
+        h0pl1.textContent = "00:00:00";
+        seconds0pl1 = 0; minutes0pl1 = 0; hours0pl1 = 0;
+        timer0pl1();
+        console.log("timer started");
+        
+		console.log("Recording started...");
+        document.getElementById("demo0pl1").innerHTML = "<b>" + "Recording Started.." + "</b>";
+		
+	 
+		
+	}).catch(function(err) {
+	  	//enable the record button if getUserMedia() fails
+    	recordButton0pl1.disabled = false;
+    	stopButton0pl1.disabled = true;
+    	pauseButton0pl1.disabled = true
+	});
+}
+
+function pauseRecording0pl1(){
+	console.log("pauseButton clicked rec.recording=",rec.recording );
+	
+	//stop the timer
+	 clearTimeout(t0pl1);
+	
+	document.getElementById("demo0pl1").innerHTML = "<b>" + "Recording paused.." + "</b>";
+	
+	if (rec.recording){
+		//pause
+		rec.stop();
+		pauseButton0pl1.innerHTML="Resume";
+	}else{
+		//resume
+		rec.record()
+        pauseButton0pl1.innerHTML="Pause";
+			document.getElementById("demo0pl1").innerHTML = "<b>" + "Recording resumed.." + "</b>";
+		timer0pl1();
+         
+		 
+	}
+}
+
+function stopRecording0pl1() {
+	console.log("stopButton clicked");
+	 
+
+	//disable the stop button, enable the record too allow for new recordings
+	stopButton0pl1.disabled = true;
+    recordButton0pl1.disabled = false;
+	pauseButton0pl1.disabled = true;
+
+	//reset button just in case the recording is stopped while paused
+	pauseButton0pl1.innerHTML="Pause";
+	
+	//tell the recorder to stop the recording
+	rec.stop();
+    document.getElementById("demo0pl1").innerHTML = "<b>" + "Recording Stopped :" + "</b>";
+	
+	//stop the timer
+	clearTimeout(t0pl1);
+    console.log("Timer Cleared");
+    
+    
+	//stop microphone access
+	gumStream.getAudioTracks()[0].stop();
+
+	rec.exportWAV(createDownloadLink0pl1);
+}
+
+function createDownloadLink0pl1(blob) {
+       var clipName = 'Audio File';
+	   
+       var uploadButton0pl1 = document.createElement('button');
+       uploadButton0pl1.className = 'uploadbut0pl1';
+	  
+ 
+	var url0pl1 = URL.createObjectURL(blob);
+	var au0pl1 = document.createElement('audio');
+	var li0pl1 = document.createElement('li');
+	var link0pl1 = document.createElement('a');
+	 
+
+	//name of .wav file to use during upload and download (without extendion)
+	var filename0pl1 = new Date().toISOString();
+
+	//add controls to the <audio> element.
+	au0pl1.controls = true;
+	au0pl1.src = url0pl1;
+   
+    
+
+	//save to device link 
+	link0pl1.href = url0pl1;
+	link0pl1.download = filename0pl1 +".wav"; //download forces the browser to donwload the file using the  filename
+    
+    uploadfile0pl1 = link0pl1.download;
+    console.log(uploadfile0pl1);
+    
+    var blobUrl = URL.createObjectURL(blob);
+
+var xhr = new XMLHttpRequest;
+xhr.responseType = 'blob';
+
+xhr.onload = function() {
+   var recoveredBlob = xhr.response;
+
+   var reader = new FileReader;
+
+   reader.onload = function() {
+     var blobAsDataUrl = reader.result;
+     window.location = blobAsDataUrl;
+   };
+
+   reader.readAsDataURL(recoveredBlob);
+};
+
+console.log(blobUrl);
+
+ 
+
+var xhr = new XMLHttpRequest;
+xhr.responseType = 'blob';
+
+xhr.onload = function() {
+   var recoveredBlob = xhr.response;
+
+   var reader = new FileReader;
+
+   reader.onload = function() {
+     var blobAsDataUrl = reader.result;
+     window.location = blobAsDataUrl;
+   };
+
+   reader.readAsDataURL(recoveredBlob);
+};
+
+
+//document.getElementById("AudioURL").value = blobUrl;	
+ //document.getElementById("AudioURL").value = link.download;	
+  
+     
+	link0pl1.innerHTML = "Save to device";
+
+
+	//add the new audio element to li
+ 
+	li0pl1.appendChild(au0pl1);
+    li0pl1.appendChild(uploadButton0pl1);
+	
+	//add the filename to the li
+	//li.appendChild(saveButton);
+	//li.appendChild(document.createTextNode(clipName + " "));
+	
+	//add the save to disk link to li
+	//li.appendChild(link);
+	 
+	//li.appendChild(link);
+	//li.appendChild(uploadButton);
+	
+	//upload link
+	 
+     document.getElementById("r0pl1").appendChild(li0pl1);
+   // recordingsList0pl1.appendChild(li0pl1);
+	uploadButton0pl1.href="#";
+	uploadButton0pl1.innerHTML = "Upload to Google Drive";
+	uploadButton0pl1.addEventListener("click", function(event){
+          console.log('Uploading Rec#2');
+		  var xhr=new XMLHttpRequest();
+		  xhr.onload=function(e) {
+		      if(this.readyState === 4) {
+		          console.log("Server returned: ",e.target.responseText);
+                   
+				 	
+				  //Get Info from php - start
+				   var filid = e.target.responseText; 
+				   var js_fileout1 = filid.trim();
+				   var js_fileout = js_fileout1 + ".wav";
+						// Get File name created by PHP
+                   var uploadurl = "https://www.formrecorder.com/uploadstemp/" + js_fileout;	
+                   var formname = 'dummy';
+                 //  document.getElementById("AudioURL").value = uploadurl;
+                    recordButton0pl1.disabled = true;
+                    var uploadstatus = 'File uploading...';
+                    document.getElementById("demo0pl1").innerHTML = uploadstatus;
+                    google.script.run.withSuccessHandler(updateUrl0pl1).upload(uploadurl);
+                  //  google.script.run.withSuccessHandler(formidinfo).forminfo(formname);
+                     
+				   var audiourl = "https://www.formrecorder.com/uploadstemp/" + js_fileout;		 
+					console.log("uploadurl......");	  
+					console.log(uploadurl);
+						var texturl = '<a href="'+ audiourl +'"target=_blank>Audio URL</a>';
+						var urlinfo = "File :" + clipName + "<br>" + "uploaded to "+ texturl;
+					 
+ 				   console.log("calling audio player");	
+				
+				var d= new Date();
+				var dispmm = d.getMonth() + 1;
+				var dispdd = d.getDate();
+				var dispyy = d.getFullYear();
+				var dispmmddyyyy = dispmm + "/" + dispdd + "/" + dispyy;
+				
+				  var filhtml = js_fileout;
+				  var filwav = js_fileout1 + ".wav";
+				//  $.ajax({ url: 'https://www.formrecorder.com/audioplayer.php',
+				//				data: {filwav,filhtml,clipName, dispmmddyyyy},
+				//				type: 'post',
+				//					success: function(output) {
+				//					alert(output);
+				//    				}
+				//	});
+					console.log("Endaudio player");	 
+					//we are doing this to get the last occurence of the button
+					var d1 =  document.getElementsByClassName("uploadbut").length;
+					var e1 = d1-1;
+                    $(".uploadbut0pl1").attr('disabled','true');
+					//document.getElementsByClassName("uploadbut0pl1").disabled = true;
+				
+			//	$.ajax({ url: 'https://www.formrecorder.com/append-upload-xml.php',
+			//					data: {filhtml,clipName, dispmmddyyyy},
+			//					type: 'post',
+			//						success: function(output) {
+			//					alert(output);
+			//	    				}
+			//		});
+			//		console.log("uploaded xml info");	
+					
+				  
+		      }
+		  };
+         
+
+		  var fd=new FormData();
+		  fd.append("audio_data",blob, filename0pl1);
+		  xhr.open("POST","https://www.formrecorder.com/uploadstemp.php",true);
+          //xhr.open("POST","google.script.run.withSuccessHandler(updateUrl).upload(audio_data)",true);
+		  xhr.send(fd);
+          r0pl1.appendChild(li0pl1);
+          
+	})
+	 
+   //  recordingsList0pl1.appendChild(li0pl1);
+}
+
+//Script for Timer0pl1 Begins
+ //Timer code - starts
+
+var h0pl1 = document.getElementById("t0pl1"),
+     
+    seconds0pl1 = 0, minutes0pl1 = 0, hours0pl1 = 0,
+    t0pl1;
+
+function add0pl1() {
+    seconds0pl1++;
+    if (seconds0pl1 >= 60) {
+        seconds0pl1 = 0;
+        minutes0pl1++;
+        if (minutes0pl1 >= 60) {
+            minutes0pl1 = 0;
+            hours0pl1++;
+        }
+    }
+    
+    h0pl1.textContent = (hours0pl1 ? (hours0pl1 > 9 ? hours0pl1 : "0" + hours0pl1) : "00") + ":" + (minutes0pl1 ? (minutes0pl1 > 9 ? minutes0pl1 : "0" + minutes0pl1) : "00") + ":" + (seconds0pl1 > 9 ? seconds0pl1 : "0" + seconds0pl1);
+
+    timer0pl1();
+}
+function timer0pl1() {
+	
+    t0pl1 = setTimeout(add0pl1, 1000);
+}
+ 
+//Timer code - ends 
+//Script for Timer0pl1 Ends
+
+// Function for Copy Text button
+function copyFunction(){
+    var copyText = document.getElementById("showurl");
+    copyText.select();
+    document.execCommand("copy");
+   
+ };
+    
+   function formidinfo(myformid) {
+   console.log("My Form id is......" + myformid);	 
+   }
+    
+   function updateUrl0pl1(audlink) {
+//   var str = "Audio Link";
+//   var result = str.link(audlink);
+   
+   var texturl = '<a href="'+ audlink +'"target=_blank>click here for the link</a>';
+   var urlinfo = "Audio File uploaded : " + texturl; 
+    
+   document.getElementById("uploadb0pl1").style.display = "none";
+   document.getElementById("showurl10pl1").style.display = "none";
+   
+   document.getElementById("demo0pl1").innerHTML = urlinfo;
+   document.getElementById("entry.529275891").value = audlink;
+   
+   document.getElementById("showurl0pl1").value = audlink;
+ 
+   
+ 
+   
+    }
+     
+    
+    function getcontent() {
+    
+    messageshow();
+ 
+    
+    }
+    
+     
+ 
+    </script> 	 
+    <!--Script for Player#0pl1 Ends-->
+    
+        <!--Script for Player#0pl2 starts-->
+	<script>
+    //webkitURL is deprecated but nevertheless
+var uploadfile;    
+URL = window.URL || window.webkitURL;
+
+var gumStream; 						//stream from getUserMedia()
+var rec; 							//Recorder.js object
+var input; 							//MediaStreamAudioSourceNode we'll be recording
+
+// shim for AudioContext when it's not avb. 
+var AudioContext = window.AudioContext || window.webkitAudioContext;
+var audioContext //audio context to help us record
+
+var recordButton0pl2 = document.getElementById("recordButton0pl2");
+var stopButton0pl2 = document.getElementById("stopButton0pl2");
+var pauseButton0pl2 = document.getElementById("pauseButton0pl2");
+
+ 
+//add events to those 2 buttons
+recordButton0pl2.addEventListener("click", startRecording0pl2);
+stopButton0pl2.addEventListener("click", stopRecording0pl2);
+pauseButton0pl2.addEventListener("click", pauseRecording0pl2);
+
+recordButton0pl2.disabled = false;
+stopButton0pl2.disabled = true;
+pauseButton0pl2.disabled = true;
+
+  
+function startRecording0pl2() {
+	console.log("recordButton clicked");
+     document.getElementById("timer0pl2").style.display = "block";
+      
+	/*
+		Simple constraints object, for more advanced audio features see
+		https://addpipe.com/blog/audio-constraints-getusermedia/
+	*/
+    
+    var constraints = { audio: true, video:false }
+
+ 	/*
+    	Disable the record button until we get a success or fail from getUserMedia() 
+	*/
+
+	recordButton0pl2.disabled = true;
+	stopButton0pl2.disabled = false;
+	pauseButton0pl2.disabled = false
+
+	/*
+    	We're using the standard promise based getUserMedia() 
+    	https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
+	*/
+
+	navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
+		console.log("getUserMedia() success, stream created, initializing Recorder.js ...");
+
+		/*
+			create an audio context after getUserMedia is called
+			sampleRate might change after getUserMedia is called, like it does on macOS when recording through AirPods
+			the sampleRate defaults to the one set in your OS for your playback device
+
+		*/
+		audioContext = new AudioContext();
+
+		//update the format 
+		//document.getElementById("formats0pl2").innerHTML="Format: 1 channel pcm @ "+audioContext.sampleRate/1000+"kHz"
+
+		/*  assign to gumStream for later use  */
+		gumStream = stream;
+		
+		/* use the stream */
+		input = audioContext.createMediaStreamSource(stream);
+
+		/* 
+			Create the Recorder object and configure to record mono sound (1 channel)
+			Recording 2 channels  will double the file size
+		*/
+		rec = new Recorder(input,{numChannels:1})
+
+		//start the recording process
+		rec.record();
+		
+        h0pl2.textContent = "00:00:00";
+        seconds0pl2 = 0; minutes0pl2 = 0; hours0pl2 = 0;
+        timer0pl2();
+        console.log("timer started");
+        
+		console.log("Recording started...");
+        document.getElementById("demo0pl2").innerHTML = "<b>" + "Recording Started.." + "</b>";
+		
+	 
+		
+	}).catch(function(err) {
+	  	//enable the record button if getUserMedia() fails
+    	recordButton0pl2.disabled = false;
+    	stopButton0pl2.disabled = true;
+    	pauseButton0pl2.disabled = true
+	});
+}
+
+function pauseRecording0pl2(){
+	console.log("pauseButton clicked rec.recording=",rec.recording );
+	
+	//stop the timer
+	 clearTimeout(t0pl2);
+	
+	document.getElementById("demo0pl2").innerHTML = "<b>" + "Recording paused.." + "</b>";
+	
+	if (rec.recording){
+		//pause
+		rec.stop();
+		pauseButton0pl2.innerHTML="Resume";
+	}else{
+		//resume
+		rec.record()
+        pauseButton0pl2.innerHTML="Pause";
+			document.getElementById("demo0pl2").innerHTML = "<b>" + "Recording resumed.." + "</b>";
+		timer0pl2();
+         
+		 
+	}
+}
+
+function stopRecording0pl2() {
+	console.log("stopButton clicked");
+	 
+
+	//disable the stop button, enable the record too allow for new recordings
+	stopButton0pl2.disabled = true;
+    recordButton0pl2.disabled = false;
+	pauseButton0pl2.disabled = true;
+
+	//reset button just in case the recording is stopped while paused
+	pauseButton0pl2.innerHTML="Pause";
+	
+	//tell the recorder to stop the recording
+	rec.stop();
+    document.getElementById("demo0pl2").innerHTML = "<b>" + "Recording Stopped :" + "</b>";
+	
+	//stop the timer
+	clearTimeout(t0pl2);
+    console.log("Timer Cleared");
+    
+    
+	//stop microphone access
+	gumStream.getAudioTracks()[0].stop();
+
+	rec.exportWAV(createDownloadLink0pl2);
+}
+
+function createDownloadLink0pl2(blob) {
+       var clipName = 'Audio File';
+	   
+       var uploadButton0pl2 = document.createElement('button');
+       uploadButton0pl2.className = 'uploadbut0pl2';
+	  
+ 
+	var url0pl2 = URL.createObjectURL(blob);
+	var au0pl2 = document.createElement('audio');
+	var li0pl2 = document.createElement('li');
+	var link0pl2 = document.createElement('a');
+	 
+
+	//name of .wav file to use during upload and download (without extendion)
+	var filename0pl2 = new Date().toISOString();
+
+	//add controls to the <audio> element.
+	au0pl2.controls = true;
+	au0pl2.src = url0pl2;
+   
+    
+
+	//save to device link 
+	link0pl2.href = url0pl2;
+	link0pl2.download = filename0pl2 +".wav"; //download forces the browser to donwload the file using the  filename
+    
+    uploadfile0pl2 = link0pl2.download;
+    console.log(uploadfile0pl2);
+    
+    var blobUrl = URL.createObjectURL(blob);
+
+var xhr = new XMLHttpRequest;
+xhr.responseType = 'blob';
+
+xhr.onload = function() {
+   var recoveredBlob = xhr.response;
+
+   var reader = new FileReader;
+
+   reader.onload = function() {
+     var blobAsDataUrl = reader.result;
+     window.location = blobAsDataUrl;
+   };
+
+   reader.readAsDataURL(recoveredBlob);
+};
+
+console.log(blobUrl);
+
+ 
+
+var xhr = new XMLHttpRequest;
+xhr.responseType = 'blob';
+
+xhr.onload = function() {
+   var recoveredBlob = xhr.response;
+
+   var reader = new FileReader;
+
+   reader.onload = function() {
+     var blobAsDataUrl = reader.result;
+     window.location = blobAsDataUrl;
+   };
+
+   reader.readAsDataURL(recoveredBlob);
+};
+
+
+//document.getElementById("AudioURL").value = blobUrl;	
+ //document.getElementById("AudioURL").value = link.download;	
+  
+     
+	link0pl2.innerHTML = "Save to device";
+
+
+	//add the new audio element to li
+ 
+	li0pl2.appendChild(au0pl2);
+    li0pl2.appendChild(uploadButton0pl2);
+	
+	//add the filename to the li
+	//li.appendChild(saveButton);
+	//li.appendChild(document.createTextNode(clipName + " "));
+	
+	//add the save to disk link to li
+	//li.appendChild(link);
+	 
+	//li.appendChild(link);
+	//li.appendChild(uploadButton);
+	
+	//upload link
+	 
+     document.getElementById("r0pl2").appendChild(li0pl2);
+   // recordingsList0pl2.appendChild(li0pl2);
+	uploadButton0pl2.href="#";
+	uploadButton0pl2.innerHTML = "Upload to Google Drive";
+	uploadButton0pl2.addEventListener("click", function(event){
+          console.log('Uploading Rec#2');
+		  var xhr=new XMLHttpRequest();
+		  xhr.onload=function(e) {
+		      if(this.readyState === 4) {
+		          console.log("Server returned: ",e.target.responseText);
+                   
+				 	
+				  //Get Info from php - start
+				   var filid = e.target.responseText; 
+				   var js_fileout1 = filid.trim();
+				   var js_fileout = js_fileout1 + ".wav";
+						// Get File name created by PHP
+                   var uploadurl = "https://www.formrecorder.com/uploadstemp/" + js_fileout;	
+                   var formname = 'dummy';
+                 //  document.getElementById("AudioURL").value = uploadurl;
+                    recordButton0pl2.disabled = true;
+                    var uploadstatus = 'File uploading...';
+                    document.getElementById("demo0pl2").innerHTML = uploadstatus;
+                    google.script.run.withSuccessHandler(updateUrl0pl2).upload(uploadurl);
+                  //  google.script.run.withSuccessHandler(formidinfo).forminfo(formname);
+                     
+				   var audiourl = "https://www.formrecorder.com/uploadstemp/" + js_fileout;		 
+					console.log("uploadurl......");	  
+					console.log(uploadurl);
+						var texturl = '<a href="'+ audiourl +'"target=_blank>Audio URL</a>';
+						var urlinfo = "File :" + clipName + "<br>" + "uploaded to "+ texturl;
+					 
+ 				   console.log("calling audio player");	
+				
+				var d= new Date();
+				var dispmm = d.getMonth() + 1;
+				var dispdd = d.getDate();
+				var dispyy = d.getFullYear();
+				var dispmmddyyyy = dispmm + "/" + dispdd + "/" + dispyy;
+				
+				  var filhtml = js_fileout;
+				  var filwav = js_fileout1 + ".wav";
+				//  $.ajax({ url: 'https://www.formrecorder.com/audioplayer.php',
+				//				data: {filwav,filhtml,clipName, dispmmddyyyy},
+				//				type: 'post',
+				//					success: function(output) {
+				//					alert(output);
+				//    				}
+				//	});
+					console.log("Endaudio player");	 
+					//we are doing this to get the last occurence of the button
+					var d1 =  document.getElementsByClassName("uploadbut").length;
+					var e1 = d1-1;
+                    $(".uploadbut0pl2").attr('disabled','true');
+					//document.getElementsByClassName("uploadbut0pl2").disabled = true;
+				
+			//	$.ajax({ url: 'https://www.formrecorder.com/append-upload-xml.php',
+			//					data: {filhtml,clipName, dispmmddyyyy},
+			//					type: 'post',
+			//						success: function(output) {
+			//					alert(output);
+			//	    				}
+			//		});
+			//		console.log("uploaded xml info");	
+					
+				  
+		      }
+		  };
+         
+
+		  var fd=new FormData();
+		  fd.append("audio_data",blob, filename0pl2);
+		  xhr.open("POST","https://www.formrecorder.com/uploadstemp.php",true);
+          //xhr.open("POST","google.script.run.withSuccessHandler(updateUrl).upload(audio_data)",true);
+		  xhr.send(fd);
+          r0pl2.appendChild(li0pl2);
+          
+	})
+	 
+   //  recordingsList0pl2.appendChild(li0pl2);
+}
+
+//Script for Timer0pl2 Begins
+ //Timer code - starts
+
+var h0pl2 = document.getElementById("t0pl2"),
+     
+    seconds0pl2 = 0, minutes0pl2 = 0, hours0pl2 = 0,
+    t0pl2;
+
+function add0pl2() {
+    seconds0pl2++;
+    if (seconds0pl2 >= 60) {
+        seconds0pl2 = 0;
+        minutes0pl2++;
+        if (minutes0pl2 >= 60) {
+            minutes0pl2 = 0;
+            hours0pl2++;
+        }
+    }
+    
+    h0pl2.textContent = (hours0pl2 ? (hours0pl2 > 9 ? hours0pl2 : "0" + hours0pl2) : "00") + ":" + (minutes0pl2 ? (minutes0pl2 > 9 ? minutes0pl2 : "0" + minutes0pl2) : "00") + ":" + (seconds0pl2 > 9 ? seconds0pl2 : "0" + seconds0pl2);
+
+    timer0pl2();
+}
+function timer0pl2() {
+	
+    t0pl2 = setTimeout(add0pl2, 1000);
+}
+ 
+//Timer code - ends 
+//Script for Timer0pl2 Ends
+
+// Function for Copy Text button
+function copyFunction(){
+    var copyText = document.getElementById("showurl");
+    copyText.select();
+    document.execCommand("copy");
+   
+ };
+    
+   function formidinfo(myformid) {
+   console.log("My Form id is......" + myformid);	 
+   }
+    
+   function updateUrl0pl2(audlink) {
+//   var str = "Audio Link";
+//   var result = str.link(audlink);
+   
+   var texturl = '<a href="'+ audlink +'"target=_blank>click here for the link</a>';
+   var urlinfo = "Audio File uploaded : " + texturl; 
+    
+   document.getElementById("uploadb0pl2").style.display = "none";
+   document.getElementById("showurl10pl2").style.display = "none";
+   
+   document.getElementById("demo0pl2").innerHTML = urlinfo;
+   document.getElementById("entry.1123769117").value = audlink;
+   
+   document.getElementById("showurl0pl2").value = audlink;
+ 
+   
+ 
+   
+    }
+     
+    
+    function getcontent() {
+    
+    messageshow();
+ 
+    
+    }
+    
+     
+ 
+    </script> 	 
+    <!--Script for Player#0pl2 Ends-->
+    
+        <!--Script for Player#0pl3 starts-->
+	<script>
+    //webkitURL is deprecated but nevertheless
+var uploadfile;    
+URL = window.URL || window.webkitURL;
+
+var gumStream; 						//stream from getUserMedia()
+var rec; 							//Recorder.js object
+var input; 							//MediaStreamAudioSourceNode we'll be recording
+
+// shim for AudioContext when it's not avb. 
+var AudioContext = window.AudioContext || window.webkitAudioContext;
+var audioContext //audio context to help us record
+
+var recordButton0pl3 = document.getElementById("recordButton0pl3");
+var stopButton0pl3 = document.getElementById("stopButton0pl3");
+var pauseButton0pl3 = document.getElementById("pauseButton0pl3");
+
+ 
+//add events to those 2 buttons
+recordButton0pl3.addEventListener("click", startRecording0pl3);
+stopButton0pl3.addEventListener("click", stopRecording0pl3);
+pauseButton0pl3.addEventListener("click", pauseRecording0pl3);
+
+recordButton0pl3.disabled = false;
+stopButton0pl3.disabled = true;
+pauseButton0pl3.disabled = true;
+
+  
+function startRecording0pl3() {
+	console.log("recordButton clicked");
+     document.getElementById("timer0pl3").style.display = "block";
+      
+	/*
+		Simple constraints object, for more advanced audio features see
+		https://addpipe.com/blog/audio-constraints-getusermedia/
+	*/
+    
+    var constraints = { audio: true, video:false }
+
+ 	/*
+    	Disable the record button until we get a success or fail from getUserMedia() 
+	*/
+
+	recordButton0pl3.disabled = true;
+	stopButton0pl3.disabled = false;
+	pauseButton0pl3.disabled = false
+
+	/*
+    	We're using the standard promise based getUserMedia() 
+    	https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
+	*/
+
+	navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
+		console.log("getUserMedia() success, stream created, initializing Recorder.js ...");
+
+		/*
+			create an audio context after getUserMedia is called
+			sampleRate might change after getUserMedia is called, like it does on macOS when recording through AirPods
+			the sampleRate defaults to the one set in your OS for your playback device
+
+		*/
+		audioContext = new AudioContext();
+
+		//update the format 
+		//document.getElementById("formats0pl3").innerHTML="Format: 1 channel pcm @ "+audioContext.sampleRate/1000+"kHz"
+
+		/*  assign to gumStream for later use  */
+		gumStream = stream;
+		
+		/* use the stream */
+		input = audioContext.createMediaStreamSource(stream);
+
+		/* 
+			Create the Recorder object and configure to record mono sound (1 channel)
+			Recording 2 channels  will double the file size
+		*/
+		rec = new Recorder(input,{numChannels:1})
+
+		//start the recording process
+		rec.record();
+		
+        h0pl3.textContent = "00:00:00";
+        seconds0pl3 = 0; minutes0pl3 = 0; hours0pl3 = 0;
+        timer0pl3();
+        console.log("timer started");
+        
+		console.log("Recording started...");
+        document.getElementById("demo0pl3").innerHTML = "<b>" + "Recording Started.." + "</b>";
+		
+	 
+		
+	}).catch(function(err) {
+	  	//enable the record button if getUserMedia() fails
+    	recordButton0pl3.disabled = false;
+    	stopButton0pl3.disabled = true;
+    	pauseButton0pl3.disabled = true
+	});
+}
+
+function pauseRecording0pl3(){
+	console.log("pauseButton clicked rec.recording=",rec.recording );
+	
+	//stop the timer
+	 clearTimeout(t0pl3);
+	
+	document.getElementById("demo0pl3").innerHTML = "<b>" + "Recording paused.." + "</b>";
+	
+	if (rec.recording){
+		//pause
+		rec.stop();
+		pauseButton0pl3.innerHTML="Resume";
+	}else{
+		//resume
+		rec.record()
+        pauseButton0pl3.innerHTML="Pause";
+			document.getElementById("demo0pl3").innerHTML = "<b>" + "Recording resumed.." + "</b>";
+		timer0pl3();
+         
+		 
+	}
+}
+
+function stopRecording0pl3() {
+	console.log("stopButton clicked");
+	 
+
+	//disable the stop button, enable the record too allow for new recordings
+	stopButton0pl3.disabled = true;
+    recordButton0pl3.disabled = false;
+	pauseButton0pl3.disabled = true;
+
+	//reset button just in case the recording is stopped while paused
+	pauseButton0pl3.innerHTML="Pause";
+	
+	//tell the recorder to stop the recording
+	rec.stop();
+    document.getElementById("demo0pl3").innerHTML = "<b>" + "Recording Stopped :" + "</b>";
+	
+	//stop the timer
+	clearTimeout(t0pl3);
+    console.log("Timer Cleared");
+    
+    
+	//stop microphone access
+	gumStream.getAudioTracks()[0].stop();
+
+	rec.exportWAV(createDownloadLink0pl3);
+}
+
+function createDownloadLink0pl3(blob) {
+       var clipName = 'Audio File';
+	   
+       var uploadButton0pl3 = document.createElement('button');
+       uploadButton0pl3.className = 'uploadbut0pl3';
+	  
+ 
+	var url0pl3 = URL.createObjectURL(blob);
+	var au0pl3 = document.createElement('audio');
+	var li0pl3 = document.createElement('li');
+	var link0pl3 = document.createElement('a');
+	 
+
+	//name of .wav file to use during upload and download (without extendion)
+	var filename0pl3 = new Date().toISOString();
+
+	//add controls to the <audio> element.
+	au0pl3.controls = true;
+	au0pl3.src = url0pl3;
+   
+    
+
+	//save to device link 
+	link0pl3.href = url0pl3;
+	link0pl3.download = filename0pl3 +".wav"; //download forces the browser to donwload the file using the  filename
+    
+    uploadfile0pl3 = link0pl3.download;
+    console.log(uploadfile0pl3);
+    
+    var blobUrl = URL.createObjectURL(blob);
+
+var xhr = new XMLHttpRequest;
+xhr.responseType = 'blob';
+
+xhr.onload = function() {
+   var recoveredBlob = xhr.response;
+
+   var reader = new FileReader;
+
+   reader.onload = function() {
+     var blobAsDataUrl = reader.result;
+     window.location = blobAsDataUrl;
+   };
+
+   reader.readAsDataURL(recoveredBlob);
+};
+
+console.log(blobUrl);
+
+ 
+
+var xhr = new XMLHttpRequest;
+xhr.responseType = 'blob';
+
+xhr.onload = function() {
+   var recoveredBlob = xhr.response;
+
+   var reader = new FileReader;
+
+   reader.onload = function() {
+     var blobAsDataUrl = reader.result;
+     window.location = blobAsDataUrl;
+   };
+
+   reader.readAsDataURL(recoveredBlob);
+};
+
+
+//document.getElementById("AudioURL").value = blobUrl;	
+ //document.getElementById("AudioURL").value = link.download;	
+  
+     
+	link0pl3.innerHTML = "Save to device";
+
+
+	//add the new audio element to li
+ 
+	li0pl3.appendChild(au0pl3);
+    li0pl3.appendChild(uploadButton0pl3);
+	
+	//add the filename to the li
+	//li.appendChild(saveButton);
+	//li.appendChild(document.createTextNode(clipName + " "));
+	
+	//add the save to disk link to li
+	//li.appendChild(link);
+	 
+	//li.appendChild(link);
+	//li.appendChild(uploadButton);
+	
+	//upload link
+	 
+     document.getElementById("r0pl3").appendChild(li0pl3);
+   // recordingsList0pl3.appendChild(li0pl3);
+	uploadButton0pl3.href="#";
+	uploadButton0pl3.innerHTML = "Upload to Google Drive";
+	uploadButton0pl3.addEventListener("click", function(event){
+          console.log('Uploading Rec#2');
+		  var xhr=new XMLHttpRequest();
+		  xhr.onload=function(e) {
+		      if(this.readyState === 4) {
+		          console.log("Server returned: ",e.target.responseText);
+                   
+				 	
+				  //Get Info from php - start
+				   var filid = e.target.responseText; 
+				   var js_fileout1 = filid.trim();
+				   var js_fileout = js_fileout1 + ".wav";
+						// Get File name created by PHP
+                   var uploadurl = "https://www.formrecorder.com/uploadstemp/" + js_fileout;	
+                   var formname = 'dummy';
+                 //  document.getElementById("AudioURL").value = uploadurl;
+                    recordButton0pl3.disabled = true;
+                    var uploadstatus = 'File uploading...';
+                    document.getElementById("demo0pl3").innerHTML = uploadstatus;
+                    google.script.run.withSuccessHandler(updateUrl0pl3).upload(uploadurl);
+                  //  google.script.run.withSuccessHandler(formidinfo).forminfo(formname);
+                     
+				   var audiourl = "https://www.formrecorder.com/uploadstemp/" + js_fileout;		 
+					console.log("uploadurl......");	  
+					console.log(uploadurl);
+						var texturl = '<a href="'+ audiourl +'"target=_blank>Audio URL</a>';
+						var urlinfo = "File :" + clipName + "<br>" + "uploaded to "+ texturl;
+					 
+ 				   console.log("calling audio player");	
+				
+				var d= new Date();
+				var dispmm = d.getMonth() + 1;
+				var dispdd = d.getDate();
+				var dispyy = d.getFullYear();
+				var dispmmddyyyy = dispmm + "/" + dispdd + "/" + dispyy;
+				
+				  var filhtml = js_fileout;
+				  var filwav = js_fileout1 + ".wav";
+				//  $.ajax({ url: 'https://www.formrecorder.com/audioplayer.php',
+				//				data: {filwav,filhtml,clipName, dispmmddyyyy},
+				//				type: 'post',
+				//					success: function(output) {
+				//					alert(output);
+				//    				}
+				//	});
+					console.log("Endaudio player");	 
+					//we are doing this to get the last occurence of the button
+					var d1 =  document.getElementsByClassName("uploadbut").length;
+					var e1 = d1-1;
+                    $(".uploadbut0pl3").attr('disabled','true');
+					//document.getElementsByClassName("uploadbut0pl3").disabled = true;
+				
+			//	$.ajax({ url: 'https://www.formrecorder.com/append-upload-xml.php',
+			//					data: {filhtml,clipName, dispmmddyyyy},
+			//					type: 'post',
+			//						success: function(output) {
+			//					alert(output);
+			//	    				}
+			//		});
+			//		console.log("uploaded xml info");	
+					
+				  
+		      }
+		  };
+         
+
+		  var fd=new FormData();
+		  fd.append("audio_data",blob, filename0pl3);
+		  xhr.open("POST","https://www.formrecorder.com/uploadstemp.php",true);
+          //xhr.open("POST","google.script.run.withSuccessHandler(updateUrl).upload(audio_data)",true);
+		  xhr.send(fd);
+          r0pl3.appendChild(li0pl3);
+          
+	})
+	 
+   //  recordingsList0pl3.appendChild(li0pl3);
+}
+
+//Script for Timer0pl3 Begins
+ //Timer code - starts
+
+var h0pl3 = document.getElementById("t0pl3"),
+     
+    seconds0pl3 = 0, minutes0pl3 = 0, hours0pl3 = 0,
+    t0pl3;
+
+function add0pl3() {
+    seconds0pl3++;
+    if (seconds0pl3 >= 60) {
+        seconds0pl3 = 0;
+        minutes0pl3++;
+        if (minutes0pl3 >= 60) {
+            minutes0pl3 = 0;
+            hours0pl3++;
+        }
+    }
+    
+    h0pl3.textContent = (hours0pl3 ? (hours0pl3 > 9 ? hours0pl3 : "0" + hours0pl3) : "00") + ":" + (minutes0pl3 ? (minutes0pl3 > 9 ? minutes0pl3 : "0" + minutes0pl3) : "00") + ":" + (seconds0pl3 > 9 ? seconds0pl3 : "0" + seconds0pl3);
+
+    timer0pl3();
+}
+function timer0pl3() {
+	
+    t0pl3 = setTimeout(add0pl3, 1000);
+}
+ 
+//Timer code - ends 
+//Script for Timer0pl3 Ends
+
+// Function for Copy Text button
+function copyFunction(){
+    var copyText = document.getElementById("showurl");
+    copyText.select();
+    document.execCommand("copy");
+   
+ };
+    
+   function formidinfo(myformid) {
+   console.log("My Form id is......" + myformid);	 
+   }
+    
+   function updateUrl0pl3(audlink) {
+//   var str = "Audio Link";
+//   var result = str.link(audlink);
+   
+   var texturl = '<a href="'+ audlink +'"target=_blank>click here for the link</a>';
+   var urlinfo = "Audio File uploaded : " + texturl; 
+    
+   document.getElementById("uploadb0pl3").style.display = "none";
+   document.getElementById("showurl10pl3").style.display = "none";
+   
+   document.getElementById("demo0pl3").innerHTML = urlinfo;
+   document.getElementById("entry.925920110").value = audlink;
+   
+   document.getElementById("showurl0pl3").value = audlink;
+ 
+   
+ 
+   
+    }
+     
+    
+    function getcontent() {
+    
+    messageshow();
+ 
+    
+    }
+    
+     
+ 
+    </script> 	 
+    <!--Script for Player#0pl3 Ends-->
+ 
+    
+  </body>
+</html>
+
+ 

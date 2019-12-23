@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en">
+  <head>
+   <?!= HtmlService.createHtmlOutputFromFile('Stylesheet').getContent(); ?> 
+   <!--It will add Stylesheet file-->
+  </head>
+ 
+ <body class="container-fluid">
+ 
+ <!--Site Logo Starts--> 
+ <div class="row">
+   <div class="col-md-2"></div>
+   <div class="col-md-8 p-4">
+     <div class="top">
+           
+	      <a class="w3schools-logo" href="https://www.formrecorder.com/">&nbsp;Form<span class="dotcom">Recorder&nbsp;</span></a>
+      <div class="w3-right  toptext w3-wide ">Record Audio via Google Form&nbsp;&nbsp;</div>
+     </div>
+   </div>
+   <div class="col-md-2"></div>
+ </div>
+  <!--Site Logo Ends--> 
+  
+  <!--Form Instruction Starts--> 
+ <div class="row">
+   <div class="col-md-2"></div>
+   <div class="col-md-8 p-4">
+     <div id ="row" class="col-md-12 shadow p-4 mb-4" style="background-color:yellow">
+         <h4 align="center">How to Fill this Audio Form</h4>
+          <h6><i>1. Please record your answer using the given recorder for the questions using the below steps.</i></h6>
+         <h6><i>2. Click Record button to start recording</i></h6>
+         <h6><i>3. Click pause button if you wish to pause the recording , you will be given a Resume button that you can click to resume recording.</i></h6>
+         <h6><i>4. Click Stop button to stop recording.You will be presented with an audio player, you can review your recording. If you are not happy with your recording, you can click
+                on record button again and record a new recording.</i></h6>
+         <h6><i>5. Once you are satisfied with the recording then click on the green Upload button for the recording that you want to submit
+                as your answer.It will upload your selected audio file to your teacher's Google drive.</i></h6>
+          
+         <h6><i>5. Fill the rest of the fields : Name, School, Email, Notes and click on SUBMIT button at the bottom of the form </i></h6>
+         
+     </div>
+   </div>
+   <div class="col-md-2"></div>
+ </div>
+  <!--Form Instruction Ends-->
+  
+    <!--Form Header Starts-->   
+ <div class="row">
+   <div class="col-md-2"></div>
+   <div class="col-md-8 p-4">
+     <div id ="row" class="col-md-12 shadow p-4 mb-4" style="background-color:#99ffff">
+         <h4 align="center"><i>Chaparral High School - Language Placement Test</i></h4>
+        <h6 align="center"><i>Please record your answers and submit them for evaluation:</i></h6>
+        <form id="myform" action="https://docs.google.com/forms/d/e/1FAIpQLSexo84rHAzYh8WWSMPQyc2ckBguaC3f65SBtzRirREbM6iBXQ/formResponse?hl=en"
+      target="_self"
+      method="POST">
+         
+     </div>
+   </div>
+   <div class="col-md-2"></div>
+ </div>
+  <!--Form Header Ends-->
+  
+ 
+ <!--Audio Player#1 Starts--> 
+ 
+ <div class="row">
+   <div class="col-md-2"></div>
+   <div class="col-md-8 p-4">
+       <div id ="audioplayer0pl1" class="col-md-12 shadow p-4 mb-4" style="background-color:#99ffff">
+        <div id ="r0pl1" align="center">
+          <ol id="recordingsList0pl1"></ol>
+       </div>
+            <div id="controls0pl1" align="center">
+		   <div id ="uploadb0pl1" align="center"></div> 
+          <button type="button" id="recordButton0pl1" class="btn btn-primary btn-sm">
+			  <span class="glyphicon glyphicon-record"></span> Record
+		  </button>
+		<!-- <button id="recordButton">Record</button> -->
+		
+		<button type="button" id="pauseButton0pl1" class="btn  btn-warning btn-sm">
+			  <span class="glyphicon glyphicon-pause"></span> Pause
+		</button>
+		<!-- <button id="pauseButton" disabled>Pause</button> -->
+		
+		<button type="button" id="stopButton0pl1" class="btn  btn-danger btn-sm">
+			  <span class="glyphicon glyphicon-stop"></span> Stop
+		</button>
+         
+		<!-- <button id="stopButton" disabled>Stop</button> -->
+        
+         
+		</div>
+		 
+		   <div>&nbsp;</div>
+        <div id="timer0pl1" class="timer" align="center">&nbsp;Recording Timer :<div id="t0pl1"><time>00:00:00</time></div>&nbsp;</div> 
+        
+		 <div>&nbsp;</div>
+		 <!-- <ol id="recordingsList0pl1"></ol>--->
+		 <!-- <section class="sound-clips" align="center">--->
+		 <div id="demo0pl1" class="status" align="center"></div>
+		  <div>&nbsp;</div>
+		<div id ="showurl10pl1" align="center"><input type="text" value="---" id="showurl0pl1"></input> 
+	 <button type="button" onclick="copyFunction()" class="copytext">Copy URL</button></div> 
+	  <!-- Field type: "url" name: "entry.529275891" -->
+    <div class="form-group">
+        <label for="entry.529275891">
+          Audio URL - Question 1  <span class="text-danger">*</span>
+        </label>
+
+            <input id="entry.529275891" type="url" name="entry.529275891" class="form-control" required>
+    </div>	
+		<div id="formats0pl1" class="formats"></div>
+     
+   
+   
+   </div>
+   </div>
+   <div class="col-md-2"></div>
+ </div>    
+ <!--Audio Player#1 Ends-->
+   
+ <!--Audio Player#2 Starts-->
+  
+ <div class="row">
+   <div class="col-md-2"></div>
+   <div class="col-md-8 p-4">
+       <div id ="audioplayer0PL2" class="col-md-12 shadow p-4 mb-4" style="background-color:#99ffff">
+            <div id ="r0pl2"align="center">
+              <ol id="recordingsList0pl2"></ol>
+           </div>
+            <div id="controls0PL2" align="center">
+		  <button type="button" id="recordButton0pl2" class="btn btn-primary btn-sm">
+			  <span class="glyphicon glyphicon-record"></span> Record
+		  </button>
+		<!-- <button id="recordButton">Record</button> -->
+		
+		<button type="button" id="pauseButton0pl2" class="btn btn-warning btn-sm">
+			  <span class="glyphicon glyphicon-pause"></span> Pause
+		</button>
+		<!-- <button id="pauseButton" disabled>Pause</button> -->
+		
+		<button type="button" id="stopButton0pl2" class="btn btn-danger btn-sm">
+			  <span class="glyphicon glyphicon-stop"></span> Stop
+		</button>
+		<!-- <button id="stopButton" disabled>Stop</button> -->
+        
+         
+		</div>
+		 
+		    <div>&nbsp;</div>
+        <div id="timer0pl2" class="timer" align="center">&nbsp;Recording Timer :<div id="t0pl2"><time>00:00:00</time></div>&nbsp;</div> 
+        
+        <div>&nbsp;</div>
+		  <ol id="recordingsList0pl2"></ol> 
+		<!-- <section class="sound-clips" align="center">-->
+		 <div id="demo0pl2" class="status" align="center"></div>
+		 <div id ="uploadb0pl2" align="center"></div>   
+		<div id ="showurl10pl2" align="center"><input type="text" value="---" id="showurl0pl2"></input> 
+	 <button type="button" onclick="copyFunction()" class="copytext">Copy URL</button></div> 
+	<!-- Field type: "url" name: "entry.1123769117" -->
+    <div class="form-group">
+        <label for="entry.1123769117">
+          Audio URL - Question 2  <span class="text-danger">*</span>
+        </label>
+
+            <input id="entry.1123769117" type="url" name="entry.1123769117" class="form-control" required>
+    </div>	
+		<div id="formats0pl2" class="formats"></div>
+     
+   </div>
+   </div>
+   <div class="col-md-2"></div>
+ </div>   
+ <!--Audio Player#2 Ends--> 
+ 
+  <!--Audio Player#3 Starts-->
+  
+ <div class="row">
+   <div class="col-md-2"></div>
+   <div class="col-md-8 p-4">
+       <div id ="audioplayer0pl3" class="col-md-12 shadow p-4 mb-4" style="background-color:#99ffff">
+            <div id ="r0pl3"align="center">
+              <ol id="recordingsList0pl3"></ol>
+           </div>
+            <div id="controls0pl3" align="center">
+		  <button type="button" id="recordButton0pl3" class="btn btn-primary btn-sm">
+			  <span class="glyphicon glyphicon-record"></span> Record
+		  </button>
+		<!-- <button id="recordButton">Record</button> -->
+		
+		<button type="button" id="pauseButton0pl3" class="btn btn-warning btn-sm">
+			  <span class="glyphicon glyphicon-pause"></span> Pause
+		</button>
+		<!-- <button id="pauseButton" disabled>Pause</button> -->
+		
+		<button type="button" id="stopButton0pl3" class="btn btn-danger btn-sm">
+			  <span class="glyphicon glyphicon-stop"></span> Stop
+		</button>
+		<!-- <button id="stopButton" disabled>Stop</button> -->
+        
+         
+		</div>
+		 
+		   <div>&nbsp;</div>
+        <div id="timer0pl3" class="timer" align="center">&nbsp;Recording Timer :<div id="t0pl3"><time>00:00:00</time></div>&nbsp;</div> 
+         <div>&nbsp;</div>
+		  <ol id="recordingsList0pl3"></ol> 
+		<!-- <section class="sound-clips" align="center">-->
+		 <div id="demo0pl3" class="status" align="center"></div>
+		 <div id ="uploadb0pl3" align="center"></div>   
+		<div id ="showurl10pl3" align="center"><input type="text" value="---" id="showurl0pl3"></input> 
+	 <button type="button" onclick="copyFunction()" class="copytext">Copy URL</button></div> 
+	<!-- Field type: "url" name: "entry.1123769117" -->
+   <!-- Field type: "url" name: "entry.925920110" -->
+    <div class="form-group">
+        <label for="entry.925920110">
+          Audio URL - Question 3  <span class="text-danger">*</span>
+        </label>
+
+            <input id="entry.925920110" type="url" name="entry.925920110" class="form-control" required>
+    </div>
+		<div id="formats0pl3" class="formats"></div>
+     
+   </div>
+   </div>
+   <div class="col-md-2"></div>
+ </div>   
+ <!--Audio Player#3 Ends--> 
+  
+  
+    <!--Rest of the Form Starts-->   
+ <div class="row">
+   <div class="col-md-2"></div>
+   <div class="col-md-8 p-4">
+     <div id ="row" class="col-md-12 shadow p-4 mb-4" style="background-color:#99ffff">
+         <!-- Field type: "text" name: "entry.242576571" -->
+    <div class="form-group">
+        <label for="entry.242576571">
+          Student Name (first and last) 
+        </label>
+
+            <input id="entry.242576571" type="text" name="entry.242576571" class="form-control" >
+    </div>
+    <!-- Field type: "text" name: "entry.1478767901" -->
+    <div class="form-group">
+        <label for="entry.1478767901">
+          Current School  <span class="text-danger">*</span>
+        </label>
+
+            <input id="entry.1478767901" type="text" name="entry.1478767901" class="form-control" required>
+    </div>
+    <!-- Field type: "text" name: "entry.833175355" -->
+    <div class="form-group">
+        <label for="entry.833175355">
+          Email address 
+        </label>
+
+            <input id="entry.833175355" type="text" name="entry.833175355" class="form-control" >
+    </div>
+    <!-- Field type: "textarea" name: "entry.2066159890" -->
+    <div class="form-group">
+        <label for="entry.2066159890">
+          Notes  <span class="text-danger">*</span>
+        </label>
+
+            <textarea id="entry.2066159890" name="entry.2066159890" class="form-control" required></textarea>
+    </div>
+
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary">SUBMIT</button>
+  </div>
+  <script>
+var GoogleFormsFormParserResultingForm = (function () {
+  var ran;
+  var dateInputs = qsa('input[type="date"]');
+  var timeInputs = qsa('input[type="time"]');
+  var otherOption = qsa('[name$=".other_option_response"]');
+  var likeRadio = qsa('.like-radio');
+  var oneResponsePerRow = qsa('.one-response-per-row');
+
+  function qs (s) {
+    console.log('Looking for ' + s);
+    return document.querySelector(s)
+  }
+  function qsa (s) {
+    console.log('Looking for ' + s);
+    return document.querySelectorAll(s)
+  }
+  function el (el, ev, l) {
+    console.log('Adding ' + ev + ' event listener to ' + el.tagName + ' ' + el.type + ' ' + (el.name || el.getAttribute('data-name')) );
+    return el.addEventListener(ev, l)
+  }
+
+  function run () {
+    ran = true;
+    registerHandlers();
+  }
+
+  function registerHandlers() {
+    dateInputs.forEach(function (element) {
+      el(element, 'change', onDateChange)
+    });
+
+    timeInputs.forEach(function (element) {
+      el(element, 'change', onTimeChange)
+    });
+
+    otherOption.forEach(function (element) {
+      el(element, 'change', onOtherOptionChange);
+      el(element, 'keyup', onOtherOptionChange)
+    });
+
+    likeRadio.forEach(function (element) {
+      el(element, 'change', onLikeRadioChange)
+    });
+
+    oneResponsePerRow.forEach(function (element) {
+      el(element, 'change', onOneResponsePerRowChange)
+    });
+  }
+
+  function onDateChange (event) {
+    var name = event.target.getAttribute('data-name');
+    var value = event.target.value;
+    var c = value.split('-');
+    qs('[name="' + name + '_year"]').value = c[0];
+    qs('[name="' + name + '_month"]').value = c[1];
+    qs('[name="' + name + '_day"]').value = c[2];
+  }
+
+  function onTimeChange (event) {
+    var name = event.target.getAttribute('data-name');
+    var value = event.target.value;
+    var c = value.split(':');
+    qs('[name="' + name + '_hour"]').value = c[0];
+    qs('[name="' + name + '_minute"]').value = c[1];
+  }
+
+  function onOtherOptionChange (event) {
+    var name = event.target.name;
+    var value = event.target.value;
+    var corresponding = name.replace('.other_option_response', '');
+    var correspondingInput = qs('[name="'+corresponding+'"][value="__other_option__"]');
+    var type = correspondingInput.getAttribute('type');
+    if (value !== '') {
+      correspondingInput.checked = true;
+    } else {
+      if (type === 'checkbox') correspondingInput.checked = false;
+    }
+  }
+
+  function onLikeRadioChange (event) {
+    var name = event.target.name;
+    var similar = qsa('[name="' + name + '"]');
+    var clicked = this;
+    similar.forEach(function (element) {
+      if (element !== clicked) element.checked = false
+    });
+  }
+
+  function onOneResponsePerRowChange (event) {
+    var group = event.target.closest('.form-group');
+    var validationContainer = group.querySelector('.validation');
+    var inputs = group.querySelectorAll('input');
+    var inputNames = [];
+    var showValidationMessage = false;
+    inputs.forEach(function (i) {
+      var name = i.getAttribute('name');
+      if (inputNames.indexOf(name) === -1)
+        inputNames.push(name);
+    });
+    inputNames.map(function (name) {
+      var checked = qs('[name="'+name+'"]:checked');
+      if (!checked) showValidationMessage = true;
+    });
+    if (validationContainer) if (showValidationMessage) {
+      validationContainer.innerText = 'This question requires at least one response per row.';
+      validationContainer.style.display = 'inline';
+    } else {
+      validationContainer.style.display = 'none';
+    }
+  }
+
+  return {
+    insureEventHandlerRegistration: function () {
+      if (!ran) {
+        ran = run();
+      }
+    }
+  };
+})();
+
+GoogleFormsFormParserResultingForm.insureEventHandlerRegistration();
+
+  </script>
+</form>
+
+         
+     </div>
+   </div>
+   <div class="col-md-2"></div>
+ </div>
+  <!--Rest of the Form Ends-->
+ 
+ <!--Footer starts--> 
+  <div class="row">
+ <div class="col-md-2"></div>
+   <div class="col-md-8 p-4">
+   
+	       <div class="col-md-12" align="center">&copy;2018 Formrecorder.com&nbsp;<br><a href="https://www.formrecorder.com/privacypolicy.html">Privacy Policy</a>&nbsp;&nbsp;
+		 <a href="https://www.formrecorder.com/contact.html">Contact us</a>&nbsp;&nbsp;
+		 <a href="https://www.formrecorder.com/faq.html">FAQ</a></div>
+      
+   </div>
+ <div class="col-md-2"></div>  
+ </div>
+ <!--Footer Ends--> 
+ 
+ 
+ 
+ <?!= HtmlService.createHtmlOutputFromFile('JavaScript').getContent(); ?>  <!--It will add JavaScript file-->
+  </body>
+</html>
+
+

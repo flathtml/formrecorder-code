@@ -1,0 +1,54 @@
+function doGet(e) {
+    var template = HtmlService.createTemplateFromFile('Index'); // It will create HTMl page from Index.html file data.
+    var pageData= template.evaluate()
+    .setTitle('Formrecorder') // Set Title 
+    .setFaviconUrl('https://www.formrecorder.com/favicon.ico')
+    .setSandboxMode(HtmlService.SandboxMode.IFRAME) //This method now has no effect — previously it set the sandbox mode used for client-side scripts
+    .addMetaTag('viewport', 'width=device-width, initial-scale=1') // It is very important tag for Responsive 
+    .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL) // Sets the state of the page's X-Frame-Options header, which controls clickjacking prevention.
+     return pageData;
+}
+
+function upload(e) { 
+    
+  try {
+    
+      var destination_id;
+      var foldername = 'formrecordercustfiles';
+      var folderind = 'NO' ;
+    
+      var folders = DriveApp.getFoldersByName(foldername);
+      while (folders.hasNext()) {
+      var folder = folders.next();
+      if(folder.getName() == foldername)
+         
+           {
+              folderind  = 'YES';
+              destination_id =  folder.getId();
+           }
+      }
+    
+    if(folderind =='NO')
+      
+    {
+      var newfolder = DriveApp.createFolder(foldername);
+      destination_id =  newfolder.getId();
+    }  
+ 
+    var img = e;
+    var imgbloburl = UrlFetchApp.fetch(img).getBlob();
+    var destination = DriveApp.getFolderById(destination_id);
+    var audfile = destination.createFile(imgbloburl);
+    var audid = audfile.getId();
+    var audlink = "https://drive.google.com/file/d/" + audid;
+    var myform = FormApp.getActiveForm();
+    var myformid = myform.getId();
+    console.log('Form id :' + myformid);
+    return  audlink;
+    
+  } catch (m) {
+  return m.toString();
+   }
+  
+}  
+
